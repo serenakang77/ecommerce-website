@@ -1,0 +1,18 @@
+li{
+    list-style-type: none;
+}
+.productLists{
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+    }
+  li{
+      width: 20%;
+      margin: 30px;
+      border: 2px solid black;
+    }
+    img{
+    height: 400px;
+    width: 100%;
+  }
+}

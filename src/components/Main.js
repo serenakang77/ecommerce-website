@@ -14,9 +14,10 @@ const Main = ({
 }) => {
   return (
     <main>
+      <div className="wrapper">
       <NavBar
-        setproductArray={setproductArray}
-        productArray={productArray}
+        // setproductArray={setproductArray}
+        // productArray={productArray}
         product={product}
         setProduct={setProduct}
         testArray={testArray}
@@ -25,8 +26,8 @@ const Main = ({
         setFilteredArray={setFilteredArray}
       />
       <Product
-        setproductArray={setproductArray}
-        productArray={productArray}
+        // setproductArray={setproductArray}
+        // productArray={productArray}
         product={product}
         setProduct={setProduct}
         testArray={testArray}
@@ -34,6 +35,7 @@ const Main = ({
         filteredArray={filteredArray}
         setFilteredArray={setFilteredArray}
       />
+      </div>
     </main>
   )
 }

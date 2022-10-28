@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 const NavBar = ({
-  setproductArray,
-  productArray,
+  // setproductArray,
+  // productArray,
   product,
   setProduct,
   testArray,
@@ -30,12 +30,11 @@ const NavBar = ({
     <nav>
       <form action=''>
         <fieldset>
-          <legend>Choose a type of product</legend>
           <input
             type='radio'
             id='allProduct'
             name='type'
-            value
+            value="placeholder"
             onClick={handleChangeType}
           />
           <label htmlFor='allProduct'>View All</label>

@@ -2,82 +2,53 @@ import "./scss/styles.scss"
 // import "./App.css"
 import Main from "./components/Main"
 import Header from "./components/Header"
+import Footer from "./components/Footer"
+
 import { useState, useEffect } from "react"
 
 function App() {
-  const [product, setProduct] = useState([])
-  const [productArray, setproductArray] = useState([])
+  const [product, setProduct] = useState("placeholder")
+  // const [productArray, setproductArray] = useState([])
   const [testArray, setTestArray] = useState([])
   const [filteredArray, setFilteredArray] = useState([])
 
-  // useEffect(() => {
-  //   async function getApiData() {
-  //     const response = await fetch(
-  //       `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${product}`
-  //     )
-  //     const data = await response.json()
-  //     const filteredProduct = data
-  //       .filter((individual) => individual.currency === "USD" && individual.price !== "0.0")
-  //       .slice(0, 24)
-  //     return setproductArray(filteredProduct)
-  //   }
-  //   getApiData()
-  // }, [product])
   useEffect(() => {
     async function getApiData() {
       const response1 = await fetch(
         `http://makeup-api.herokuapp.com/api/v1/products.json`
-      )
-      const data1 = await response1.json()
-      const filteredProduct1 = data1
-        .filter((individual) =>individual.currency === "USD" && individual.price !== "0.0")
+        )
+        const data1 = await response1.json()
+        const filteredProduct1 = data1
+        // .slice(0, 400)
+        .filter((individual) =>individual.currency === "USD" && individual.price !== "0.0" && individual.id !== 1005)
         .slice(0, 200)
         console.log(filteredProduct1)
-      setTestArray(filteredProduct1)
-      // const tes = [...testArray]
-      // console.log(tes);
-      // console.log(testArray);
-    }
-    getApiData()
-  }, [product])
-  // }, [product])
-  // if(){
-  //   return(
-      
-  //   )
-  // }
-  // useEffect(() => {
-  //   async function getApiData() {
-  //     const response = await fetch(
-  //       `http://makeup-api.herokuapp.com/api/v1/products.json`
-  //     )
-  //     const data = await response.json()
-  //     const filteredProduct = data
-  //       .filter(
-  //         (individual) =>
-  //           individual.currency === "USD" && individual.price !== "0.0"
-  //       )
-  //       .slice(0, 150)
-  //     return setproductArray(filteredProduct)
-  //   }
-  //   getApiData()
-  // }, [product])
+        if(product=="placeholder"){
+        setFilteredArray(filteredProduct1)
+      }else{
+        setFilteredArray(
+          filteredProduct1.filter(({ product_type }) => product == product_type)
+          )
+        }
+      }
+      getApiData()
+    }, [product])
 
-  // getApiData()
-  return (
-    <div className='App'>
+    return (
+      <div className='App'>
       <Header />
 
       <Main
-        setproductArray={setproductArray}
-        productArray={productArray}
+        // setproductArray={setproductArray}
+        // productArray={productArray}
         product={product}
         setProduct={setProduct}
         testArray={testArray}
         setTestArray={setTestArray}
         filteredArray={filteredArray}
         setFilteredArray={setFilteredArray}
-      />
+        />
+        <Footer />
     </div>
   )
 }
@@ -87,7 +58,7 @@ export default App
 // PSEUDO CODE
 
 // Inside of App.js, make useState for product type value & product type array and pass it to children component by props
-  // Get the API data by async function and useEffect when the product type value changes
+// Get the API data by async function and useEffect when the product type value changes
 
 // Make a Header Component
 // Inside of header component(Logo, cart, currency)
@@ -98,8 +69,49 @@ export default App
 // Make a Main Component 
 
 // Make a Nav component inside of Main component(input, label) 
-  // make input element that has a value of specific type, so we can use event.target.value to update productype value
+// make input element that has a value of specific type, so we can use event.target.value to update productype value
 
 // Make Product component inside of Main component
-  // Make itemList component inside of Main component
-  // map through individual array, and show individual item image, item name, price, add to cart button
+// Make itemList component inside of Main component
+// map through individual array, and show individual item image, item name, price, add to cart button
+
+// useEffect(() => {
+//   async function getApiData() {
+//     const response = await fetch(
+//       `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${product}`
+//     )
+//     const data = await response.json()
+//     const filteredProduct = data
+//       .filter((individual) => individual.currency === "USD" && individual.price !== "0.0")
+//       .slice(0, 24)
+//     return setproductArray(filteredProduct)
+//   }
+//   getApiData()
+// }, [product])
+
+
+
+
+
+
+
+
+
+        // useEffect(() => {
+          //   async function getApiData() {
+            //     const response = await fetch(
+              //       `http://makeup-api.herokuapp.com/api/v1/products.json`
+              //     )
+              //     const data = await response.json()
+              //     const filteredProduct = data
+  //       .filter(
+    //         (individual) =>
+    //           individual.currency === "USD" && individual.price !== "0.0"
+    //       )
+    //       .slice(0, 150)
+    //     return setproductArray(filteredProduct)
+    //   }
+    //   getApiData()
+    // }, [product])
+    
+    // getApiData()

@@ -3,8 +3,8 @@ import header from "./assets/header.png"
 const Header = () => {
     return (
       <header>
-        <nav>
-          <ul>
+        <nav className='top-nav-container'>
+          <ul className='header-wrapper'>
             <li>
               <a href=''>LOGO</a>
             </li>

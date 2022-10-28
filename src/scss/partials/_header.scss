@@ -1,0 +1,15 @@
+.top-nav-container{
+    background-color: #fdfcf8;
+    position: fixed;
+    z-index: 10;
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    height: 64px;
+    ul{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+}

@@ -1,18 +1,15 @@
-li{
-    list-style-type: none;
+@use "partials/base-styles";
+@use "partials/header";
+@use "partials/main";
+
+footer{
+  height: 50px;
+  background-color: #fdfcf8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.productLists{
-    ul{
-        display: flex;
-        flex-wrap: wrap;
-    }
-  li{
-      width: 20%;
-      margin: 30px;
-      border: 2px solid black;
-    }
-    img{
-    height: 400px;
-    width: 100%;
-  }
-}
+
+
+
+

@@ -1,8 +1,10 @@
 import "./scss/styles.scss"
+import { Link, Routes, Route } from "react-router-dom"
 // import "./App.css"
 import Main from "./components/Main"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import ProductDetails from "./components/ProductDetail"
 
 import { useState, useEffect } from "react"
 
@@ -35,22 +37,38 @@ function App() {
     }, [product])
 
     return (
-      <div className='App'>
-      <Header />
-
-      <Main
-        // setproductArray={setproductArray}
-        // productArray={productArray}
-        product={product}
-        setProduct={setProduct}
-        testArray={testArray}
-        setTestArray={setTestArray}
-        filteredArray={filteredArray}
-        setFilteredArray={setFilteredArray}
-        />
-        <Footer />
-    </div>
-  )
+      <Routes>
+      
+        <Route path='/' element={
+          <>
+          <div className='App'>
+            <Header />
+            <Main
+              // setproductArray={setproductArray}
+              // productArray={productArray}
+              product={product}
+              setProduct={setProduct}
+              testArray={testArray}
+              setTestArray={setTestArray}
+              filteredArray={filteredArray}
+              setFilteredArray={setFilteredArray}
+            />
+            <Footer />
+          </div>
+          </>
+        } />
+          
+        <Route path='/product/:id' element={
+        <>
+        <div className='App'>
+          <Header />
+          <ProductDetails />
+          <Footer />
+        </div>
+        </>
+        } />
+        </Routes>
+    )
 }
 
 export default App

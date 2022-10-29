@@ -1,6 +1,7 @@
 // import { useEffect } from "react"
 import { useState, useEffect } from "react"
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { Routes, Route, useNavigate, Link } from "react-router-dom"
+
 const Product = ({
   // setproductArray,
   // productArray,
@@ -11,10 +12,6 @@ const Product = ({
   filteredArray,
   setFilteredArray,
 }) => {
-  const navigate = useNavigate()
-  const navigateToProductDetail = () => {
-    navigate("./productDetail")
-  }
 
   return (
     <div className='productLists'>
@@ -23,7 +20,8 @@ const Product = ({
           ? filteredArray.map((individual) => {
               return (
                 <>
-                <li onClick={navigateToProductDetail}>
+                <Link to={`product/${individual.id}`}>
+                <li>
                   <img
                     src={individual.api_featured_image}
                     alt={individual.name}
@@ -33,7 +31,7 @@ const Product = ({
                   <p>${individual.price}</p>
                   <button>Add To Cart</button>
                 </li>
-                <Route path="/productDetail" element={<ProductDetail />} />
+                </Link>
                 </>
               )
             })

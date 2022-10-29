@@ -5,12 +5,12 @@ import { useState, useEffect } from "react"
 const ProductDetails = ({
   product,
   setProduct,
-  testArray,
-  setTestArray,
   filteredArray,
   setFilteredArray,
   productId,
   setProductId,
+  cartId,
+  setCartId
 }) => {
     const [singleItem, setSingleItem] = useState([])
     const navigate = useNavigate();

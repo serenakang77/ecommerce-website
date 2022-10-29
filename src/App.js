@@ -11,11 +11,10 @@ import { useState, useEffect } from "react"
 
 function App() {
   const [product, setProduct] = useState("placeholder")
-  // const [productArray, setproductArray] = useState([])
-  // const [testArray, setTestArray] = useState([])
   const [filteredArray, setFilteredArray] = useState([])
   const [productId, setProductId] = useState("")
-
+  const [cartId, setCartId] = useState("")
+  const [arrayOfObjectCart, setArrayOfObjectCart] = useState([])
   useEffect(() => {
     async function getApiData() {
       const response1 = await fetch(
@@ -23,19 +22,14 @@ function App() {
         )
         const data1 = await response1.json()
         const filteredProduct1 = data1
-        // .slice(0, 400)
         .filter((individual) =>individual.currency === "USD" && individual.price !== "0.0" && individual.id !== 1005)
         .slice(0, 200)
-        if(product=="placeholder"){
-        setFilteredArray(filteredProduct1)
-      }else{
-        setFilteredArray(
-          filteredProduct1.filter(({ product_type }) => product == product_type)
-          )
-        }
-      }
-      getApiData()
-    }, [product])
+        product=="placeholder"
+        ?setFilteredArray(filteredProduct1)
+        :setFilteredArray(filteredProduct1.filter(({ product_type }) => product == product_type))
+    }
+    getApiData()
+  }, [product])
 
     return (
       <Routes>
@@ -44,19 +38,24 @@ function App() {
           element={
             <>
               <div className='App'>
-                <HeaderNav />
+                <HeaderNav
+                  cartId={cartId}
+                  setCartId={setCartId}
+                  arrayOfObjectCart={arrayOfObjectCart}
+                  setArrayOfObjectCart={setArrayOfObjectCart}
+                />
                 <Header />
                 <Main
-                  // setproductArray={setproductArray}
-                  // productArray={productArray}
                   product={product}
                   setProduct={setProduct}
                   productId={productId}
                   setProductId={setProductId}
-                  // testArray={testArray}
-                  // setTestArray={setTestArray}
                   filteredArray={filteredArray}
                   setFilteredArray={setFilteredArray}
+                  cartId={cartId}
+                  setCartId={setCartId}
+                  arrayOfObjectCart={arrayOfObjectCart}
+                  setArrayOfObjectCart={setArrayOfObjectCart}
                 />
                 <Footer />
               </div>
@@ -75,10 +74,10 @@ function App() {
                   setProduct={setProduct}
                   productId={productId}
                   setProductId={setProductId}
-                  // testArray={testArray}
-                  // setTestArray={setTestArray}
                   filteredArray={filteredArray}
                   setFilteredArray={setFilteredArray}
+                  cartId={cartId}
+                  setCartId={setCartId}
                 />
                 <Footer />
               </div>

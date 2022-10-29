@@ -3,8 +3,6 @@ import Product from "./Product"
 import { useState, useEffect } from "react"
 
 const Main = ({
-  setproductArray,
-  productArray,
   product,
   setProduct,
   testArray,
@@ -13,13 +11,15 @@ const Main = ({
   setFilteredArray,
   productId,
   setProductId,
+  cartId,
+  setCartId,
+  arrayOfObjectCart,
+  setArrayOfObjectCart,
 }) => {
   return (
     <main>
       <div className='wrapper'>
         <NavBar
-          // setproductArray={setproductArray}
-          // productArray={productArray}
           product={product}
           setProduct={setProduct}
           testArray={testArray}
@@ -30,8 +30,6 @@ const Main = ({
           setProductId={setProductId}
         />
         <Product
-          // setproductArray={setproductArray}
-          // productArray={productArray}
           product={product}
           setProduct={setProduct}
           testArray={testArray}
@@ -40,6 +38,10 @@ const Main = ({
           setFilteredArray={setFilteredArray}
           productId={productId}
           setProductId={setProductId}
+          cartId={cartId}
+          setCartId={setCartId}
+          arrayOfObjectCart={arrayOfObjectCart}
+          setArrayOfObjectCart={setArrayOfObjectCart}
         />
       </div>
     </main>

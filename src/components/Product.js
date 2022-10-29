@@ -2,19 +2,29 @@
 import { Link } from "react-router-dom"
 
 const Product = ({
-  // setproductArray,
-  // productArray,
   product,
   setProduct,
-  testArray,
-  setTestArray,
   filteredArray,
   setFilteredArray,
   productId,
   setProductId,
+  cartId,
+  setCartId,
+  arrayOfObjectCart,
+  setArrayOfObjectCart,
 }) => {
   const getId = (individualKey) => {
     return setProductId(individualKey)
+  }
+  const getIdObject = (id) => {
+    const array = filteredArray.filter((individual) => individual.id == id)
+    // const object = {...array}
+    // console.log(object)
+    for(let element of array){
+      // console.log(element);
+      setArrayOfObjectCart((prevState) => [...prevState, element])
+      // console.log(arrayOfObjectCart)
+    }
   }
   return (
     <div className='productLists'>
@@ -38,7 +48,13 @@ const Product = ({
                       <p>{individual.name}</p>
                     </Link>
                     <p>${individual.price}</p>
-                    <button>Add To Cart</button>
+                    <button
+                      onClick={() => {
+                        getIdObject(individual.id)
+                      }}
+                    >
+                      Add To Cart
+                    </button>
                   </li>
                 </>
               )

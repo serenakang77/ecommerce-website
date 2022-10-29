@@ -1,30 +1,14 @@
 import { useState, useEffect } from "react"
 const NavBar = ({
-  // setproductArray,
-  // productArray,
   product,
   setProduct,
-  testArray,
-  setTestArray,
   filteredArray,
   setFilteredArray,
 }) => {
-  // function test(event){
-  //   if(event.target.value === product){
-  //     console.log("yei");
-  //   }
-  // }
+
   const handleChangeType = (event) => {
-    // test(event)
     return setProduct(event.target.value)
   }
-
-  // async function test() {}
-  // useEffect(() => {
-  //   const test = (event) => {
-  //     console.log(event.target.value)
-  //   }
-  // }, [product])
 
   return (
     <nav>

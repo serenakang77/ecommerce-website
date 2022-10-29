@@ -11,30 +11,36 @@ const Main = ({
   setTestArray,
   filteredArray,
   setFilteredArray,
+  productId,
+  setProductId,
 }) => {
   return (
     <main>
-      <div className="wrapper">
-      <NavBar
-        // setproductArray={setproductArray}
-        // productArray={productArray}
-        product={product}
-        setProduct={setProduct}
-        testArray={testArray}
-        setTestArray={setTestArray}
-        filteredArray={filteredArray}
-        setFilteredArray={setFilteredArray}
-      />
-      <Product
-        // setproductArray={setproductArray}
-        // productArray={productArray}
-        product={product}
-        setProduct={setProduct}
-        testArray={testArray}
-        setTestArray={setTestArray}
-        filteredArray={filteredArray}
-        setFilteredArray={setFilteredArray}
-      />
+      <div className='wrapper'>
+        <NavBar
+          // setproductArray={setproductArray}
+          // productArray={productArray}
+          product={product}
+          setProduct={setProduct}
+          testArray={testArray}
+          setTestArray={setTestArray}
+          filteredArray={filteredArray}
+          setFilteredArray={setFilteredArray}
+          productId={productId}
+          setProductId={setProductId}
+        />
+        <Product
+          // setproductArray={setproductArray}
+          // productArray={productArray}
+          product={product}
+          setProduct={setProduct}
+          testArray={testArray}
+          setTestArray={setTestArray}
+          filteredArray={filteredArray}
+          setFilteredArray={setFilteredArray}
+          productId={productId}
+          setProductId={setProductId}
+        />
       </div>
     </main>
   )

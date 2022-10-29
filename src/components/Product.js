@@ -1,6 +1,5 @@
 // import { useEffect } from "react"
-import { useState, useEffect } from "react"
-import { Routes, Route, useNavigate, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Product = ({
   // setproductArray,
@@ -11,8 +10,12 @@ const Product = ({
   setTestArray,
   filteredArray,
   setFilteredArray,
+  productId,
+  setProductId,
 }) => {
-
+  const getId = (individualKey) => {
+    return setProductId(individualKey)
+  }
   return (
     <div className='productLists'>
       <ul>
@@ -20,18 +23,23 @@ const Product = ({
           ? filteredArray.map((individual) => {
               return (
                 <>
-                <Link to={`product/${individual.id}`}>
-                <li>
-                  <img
-                    src={individual.api_featured_image}
-                    alt={individual.name}
-                  />
-                  <p>{individual.brand}</p>
-                  <p>{individual.name}</p>
-                  <p>${individual.price}</p>
-                  <button>Add To Cart</button>
-                </li>
-                </Link>
+                  <li
+                    key={individual.id}
+                    onClick={() => {
+                      getId(individual.id)
+                    }}
+                  >
+                    <Link to={`product/${individual.id}`}>
+                      <img
+                        src={individual.api_featured_image}
+                        alt={individual.name}
+                      />
+                      <p>{individual.brand}</p>
+                      <p>{individual.name}</p>
+                    </Link>
+                    <p>${individual.price}</p>
+                    <button>Add To Cart</button>
+                  </li>
                 </>
               )
             })

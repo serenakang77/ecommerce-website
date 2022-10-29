@@ -1,18 +1,20 @@
 import "./scss/styles.scss"
-import { Link, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 // import "./App.css"
 import Main from "./components/Main"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import ProductDetails from "./components/ProductDetail"
+import HeaderNav from "./components/HeaderNav"
 
 import { useState, useEffect } from "react"
 
 function App() {
   const [product, setProduct] = useState("placeholder")
   // const [productArray, setproductArray] = useState([])
-  const [testArray, setTestArray] = useState([])
+  // const [testArray, setTestArray] = useState([])
   const [filteredArray, setFilteredArray] = useState([])
+  const [productId, setProductId] = useState("")
 
   useEffect(() => {
     async function getApiData() {
@@ -24,7 +26,6 @@ function App() {
         // .slice(0, 400)
         .filter((individual) =>individual.currency === "USD" && individual.price !== "0.0" && individual.id !== 1005)
         .slice(0, 200)
-        console.log(filteredProduct1)
         if(product=="placeholder"){
         setFilteredArray(filteredProduct1)
       }else{
@@ -38,36 +39,53 @@ function App() {
 
     return (
       <Routes>
-      
-        <Route path='/' element={
-          <>
-          <div className='App'>
-            <Header />
-            <Main
-              // setproductArray={setproductArray}
-              // productArray={productArray}
-              product={product}
-              setProduct={setProduct}
-              testArray={testArray}
-              setTestArray={setTestArray}
-              filteredArray={filteredArray}
-              setFilteredArray={setFilteredArray}
-            />
-            <Footer />
-          </div>
-          </>
-        } />
-          
-        <Route path='/product/:id' element={
-        <>
-        <div className='App'>
-          <Header />
-          <ProductDetails />
-          <Footer />
-        </div>
-        </>
-        } />
-        </Routes>
+        <Route
+          path='/'
+          element={
+            <>
+              <div className='App'>
+                <HeaderNav />
+                <Header />
+                <Main
+                  // setproductArray={setproductArray}
+                  // productArray={productArray}
+                  product={product}
+                  setProduct={setProduct}
+                  productId={productId}
+                  setProductId={setProductId}
+                  // testArray={testArray}
+                  // setTestArray={setTestArray}
+                  filteredArray={filteredArray}
+                  setFilteredArray={setFilteredArray}
+                />
+                <Footer />
+              </div>
+            </>
+          }
+        />
+
+        <Route
+          path='/product/:id'
+          element={
+            <>
+              <div className='App'>
+                <HeaderNav />
+                <ProductDetails
+                  product={product}
+                  setProduct={setProduct}
+                  productId={productId}
+                  setProductId={setProductId}
+                  // testArray={testArray}
+                  // setTestArray={setTestArray}
+                  filteredArray={filteredArray}
+                  setFilteredArray={setFilteredArray}
+                />
+                <Footer />
+              </div>
+            </>
+          }
+        />
+      </Routes>
     )
 }
 

@@ -22,6 +22,11 @@ li {
   max-width: 1000px;
 }
 
+svg {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
 .top-nav-container {
   background-color: #fdfcf8;
   position: fixed;
@@ -73,7 +78,9 @@ main .productLists li:hover, main .productLists li:focus {
   transform: scale(1.05);
 }
 main .productLists img {
-  height: auto;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 100%;
 }
 
@@ -85,10 +92,6 @@ main .productLists img {
 }
 .productDetail .productContainer {
   width: 55%;
-}
-.productDetail .productContainer svg {
-  font-size: 2rem;
-  cursor: pointer;
 }
 .productDetail .productImageContainer {
   height: 600px;

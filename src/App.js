@@ -15,6 +15,8 @@ function App() {
   const [productId, setProductId] = useState("")
   const [cartId, setCartId] = useState("")
   const [arrayOfObjectCart, setArrayOfObjectCart] = useState([])
+  const [isCartClicked, setIsCartClicked] = useState(false)
+
   useEffect(() => {
     async function getApiData() {
       const response1 = await fetch(
@@ -30,7 +32,16 @@ function App() {
     }
     getApiData()
   }, [product])
-
+  const add = (item) => {
+    setArrayOfObjectCart([...arrayOfObjectCart,{...item, amount: 1}])
+  }
+  //  const showCart = (e) => {
+  //    e.preventDefault()
+  //    setIsCartClicked(!isCartClicked)
+  //  }
+  const amountChanged = () => {
+    console.log("as");
+  }
     return (
       <Routes>
         <Route
@@ -43,6 +54,8 @@ function App() {
                   setCartId={setCartId}
                   arrayOfObjectCart={arrayOfObjectCart}
                   setArrayOfObjectCart={setArrayOfObjectCart}
+                  amountChanged={amountChanged}
+                  // showCart={showCart}
                 />
                 <Header />
                 <Main
@@ -68,8 +81,13 @@ function App() {
           element={
             <>
               <div className='App'>
-                <HeaderNav />
+                <HeaderNav
+                  isCartClicked={isCartClicked}
+                  setIsCartClicked={setIsCartClicked}
+                />
                 <ProductDetails
+                  isCartClicked={isCartClicked}
+                  setIsCartClicked={setIsCartClicked}
                   product={product}
                   setProduct={setProduct}
                   productId={productId}
@@ -78,6 +96,9 @@ function App() {
                   setFilteredArray={setFilteredArray}
                   cartId={cartId}
                   setCartId={setCartId}
+                  add={add}
+                  // showCart={showCart}
+                  
                 />
                 <Footer />
               </div>

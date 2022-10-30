@@ -17,11 +17,12 @@ const Product = ({
     return setProductId(individualKey)
   }
   const getIdObject = (id) => {
+    // array is the individual object for specific id
     const array = filteredArray.filter((individual) => individual.id == id)
     // const object = {...array}
     // console.log(object)
     for(let element of array){
-      // console.log(element);
+      
       setArrayOfObjectCart((prevState) => [...prevState, element])
       // console.log(arrayOfObjectCart)
     }

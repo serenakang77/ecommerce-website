@@ -16,6 +16,9 @@ const Main = ({
   arrayOfObjectCart,
   setArrayOfObjectCart,
 }) => {
+
+
+
   return (
     <main>
       <div className='wrapper'>

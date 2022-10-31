@@ -1,17 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import Cart from "./Cart";
-import {useState} from "react";
-import { Routes, Route } from "react-router-dom"
+import logo from "./assets/logo.webp"
+// import {useState} from "react";
+// import { Routes, Route } from "react-router-dom"
 const HeaderNav = ({
-  cartId,
-  setCartId,
   arrayOfObjectCart,
   setArrayOfObjectCart,
-  amountChanged,
   isCartClicked,
   setIsCartClicked,
-//   showCart,
 }) => {
     const showCart = (e) => {
       e.preventDefault()
@@ -21,39 +18,23 @@ const HeaderNav = ({
   return (
     <>
       {isCartClicked ? (
-              <Cart
-                isCartClicked={isCartClicked}
-                setIsCartClicked={setIsCartClicked}
-                showCart={showCart}
-                arrayOfObjectCart={arrayOfObjectCart}
-                setArrayOfObjectCart={setArrayOfObjectCart}
-                amountChanged={amountChanged}
-                
-              />
+        <Cart
+          // isCartClicked={isCartClicked}
+          // setIsCartClicked={setIsCartClicked}
+          showCart={showCart}
+          arrayOfObjectCart={arrayOfObjectCart}
+          setArrayOfObjectCart={setArrayOfObjectCart}
+        />
       ) : (
         "null"
       )}
-      {/* {isCartClicked ? (
-        <Routes>
-          <Route path='/product/cart' element=
-            {
-                <Cart
-                  isCartClicked={isCartClicked}
-                  setIsCartClicked={setIsCartClicked}
-                  showCart={showCart}
-                  arrayOfObjectCart={arrayOfObjectCart}
-                  setArrayOfObjectCart={setArrayOfObjectCart}
-                  amountChanged={amountChanged}
-                />
-            } />
-        </Routes>
-      ) : (
-        "null"
-      )} */}
+
       <nav className='top-nav-container'>
         <ul className='header-wrapper'>
           <li>
-            <a href='/'>LOGO</a>
+            <a href="./">
+              <img src={logo} alt="SERE MAKE Logo"/>
+            </a>
           </li>
           <li onClick={showCart}>
             <a href=''>

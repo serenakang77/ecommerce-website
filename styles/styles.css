@@ -1,3 +1,7 @@
+html {
+  font-size: 125%;
+}
+
 ul, li, p {
   margin: 0;
   padding: 0;
@@ -25,22 +29,64 @@ li {
 svg {
   font-size: 2rem;
   cursor: pointer;
+  color: black;
+}
+
+p {
+  font-size: clamp(0.7rem, 1vw, 1rem);
+}
+
+button {
+  font-size: clamp(0.7rem, 0.8vw, 1rem);
 }
 
 .top-nav-container {
-  background-color: #fdfcf8;
+  background-color: #e2cac3;
   position: fixed;
   z-index: 10;
   left: 0%;
   top: 0%;
   right: 0%;
-  height: 64px;
+  height: 70px;
 }
 .top-nav-container ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
+}
+.top-nav-container ul img {
+  width: 90px;
+}
+
+header .header-img {
+  display: flex;
+  margin-top: 40px;
+  width: 100%;
+}
+header .header-img img {
+  width: 50%;
+  height: 100%;
+}
+header .header-img .header-content {
+  width: 40%;
+  background-color: #fff6f3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5%;
+}
+header .header-img .header-content a {
+  border: none;
+  background-color: #e2cac3;
+  width: 160px;
+  margin-top: 50px;
+  padding: 20px 0;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  border-radius: 35px;
 }
 
 main .wrapper {
@@ -50,6 +96,9 @@ main .wrapper {
 main .wrapper form {
   width: 120px;
   height: 300px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 90px;
 }
 main .wrapper form fieldset {
   border: none;
@@ -61,27 +110,57 @@ main .wrapper form fieldset {
 main .wrapper form input {
   display: none;
 }
+main .wrapper form input[type=radio]:checked + label, main .wrapper form label:hover {
+  color: teal;
+}
+main .productLists {
+  padding-left: 5%;
+}
 main .productLists ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 main .productLists li {
-  width: 20%;
-  margin: 0 20px 40px 20px;
-  padding: 20px;
-  background-color: #fff6f3;
-  cursor: pointer;
-  transition: 0.5s;
+  width: 19%;
+  margin: 0 1% 40px 1%;
+  padding: 2%;
 }
-main .productLists li:hover, main .productLists li:focus {
-  transform: scale(1.05);
+main .productLists button {
+  cursor: pointer;
+  border: none;
+  background-color: #e2cac3;
+  display: flex;
+  padding: 10px 0;
+  width: 80%;
+  border-radius: 20px;
+  justify-content: center;
+  font-weight: bold;
 }
 main .productLists img {
-  height: 300px;
+  cursor: pointer;
+  height: 250px;
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
+  transition: 0.5s;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+main .productLists img:hover, main .productLists img:focus {
+  transform: scale(1.05);
+}
+main .productLists p:nth-child(4) {
+  padding: 5px 0 15px 0;
+  font-weight: 700;
+}
+main .productLists p:nth-child(2) {
+  font-weight: 600;
+  font-size: clamp(0.6rem, 0.85vw, 0.9rem);
+  line-height: 1;
+}
+main .productLists p:nth-child(3) {
+  line-height: 1.5;
 }
 
 .productDetail {

@@ -5,6 +5,8 @@ main{
         form{
             width: 120px;
             height: 300px;
+            position: sticky;
+            top: 90px;
             fieldset{
                 border: none;
                 display: flex;
@@ -15,30 +17,68 @@ main{
             input{
                 display: none;
             }
+            input[type="radio"]:checked + label, label:hover{
+                color: teal;
+
+            }
+
         }
     }
     .productLists{
+        padding-left: 5%;
+        
         ul{
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start;
         }
         li{
-            width: 20%;
-            margin: 0 20px 40px 20px;
-            padding: 20px;
-            background-color: #fff6f3;
+            width: 19%;
+            margin: 0 1% 40px 1%;
+            padding: 2%;
+            // background-color: #fff6f3;
+            // position: relative;
+        }
+        button{
             cursor: pointer;
+            border: none;
+            background-color: #e2cac3;
+            display: flex;
+            padding: 10px 0;
+            width: 80%;
+            // margin: 0 ;
+            border-radius: 20px;
+            justify-content: center;
+            font-weight: bold;
+            // position: absolute;
+
+        }
+        img{
+            cursor: pointer;
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
             transition: 0.5s;
+            margin-bottom: 10px;
+            border-radius: 10px;
             &:hover, &:focus{
                 transform: scale(1.05);
             }
+        }
+        p{
+            // padding-bottom: 7px;
+            &:nth-child(4){
+                padding: 5px 0 15px 0;
+                font-weight: 700;
             }
-            img{
-            height: 300px;
-            object-fit: cover;
-            width: 100%;
-            // border-radius: 50%;
+            &:nth-child(2){
+                font-weight: 600;
+                font-size: clamp(0.6rem,0.85vw ,0.9rem);
+                line-height: 1;
+            }
+            &:nth-child(3){
+                line-height: 1.5;
+            }
         }
     }   
 }

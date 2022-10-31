@@ -6,10 +6,62 @@ const Cart = ({
   showCart,
   arrayOfObjectCart,
   setArrayOfObjectCart,
-  amountChanged,
 }) => {
-  const [productCount, setProductCount] = useState(0)
-  const [individualProductCount, setIndividualProductCount] = useState(0)
+  const [value, setValue] = useState({})
+  const removeItem = (product) => {
+    const findSelectedProduct = arrayOfObjectCart.filter(
+      (item) => item.id != product.id
+    )
+    setArrayOfObjectCart(findSelectedProduct)
+  }
+
+  const increaseQty = (product) => {
+    const exist = arrayOfObjectCart.find((x) => x.id === product.id)
+    const newCartItems = arrayOfObjectCart.map((x) =>
+      x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+    )
+    setArrayOfObjectCart(newCartItems)
+  }
+  const decreaseQty = (product) => {
+    const exist = arrayOfObjectCart.find((x) => x.id === product.id)
+    const newCartItems = arrayOfObjectCart.map((x) =>
+      exist.qty <= 1
+        ? x.id === product.id
+          ? { ...exist, qty: exist.qty }
+          : x
+        : x.id === product.id
+        ? { ...exist, qty: exist.qty - 1 }
+        : x
+    )
+    setArrayOfObjectCart(newCartItems)
+  }
+  // ERROR(If cart is empty, it gives the error, handle this!!!!)
+  useEffect(() => {
+    if(arrayOfObjectCart.length >0){
+      const totalCartNumbers = arrayOfObjectCart
+        .map(({ qty }) => qty)
+        .reduce((a, b) => a + b)
+      const subtotal = arrayOfObjectCart
+        .map(({ qty, price }) => qty * price)
+        .reduce((a, b) => a + b)
+      const taxTotal = parseInt((subtotal * 0.13).toFixed(2))
+      const finalTotal = taxTotal + subtotal  
+      setValue({
+        totalCartNumbers: totalCartNumbers,
+        subtotal: subtotal,
+        taxTotal: taxTotal,
+        finalTotal: finalTotal
+      })
+    }else{
+      setValue({
+        totalCartNumbers: 0,
+        subtotal: 0,
+        taxTotal: 0,
+        finalTotal: 0,
+      })
+
+    }
+  }, [arrayOfObjectCart])
 
   return (
     <div className='dark-background'>
@@ -17,34 +69,43 @@ const Cart = ({
         <div className='cart-title'>
           <FontAwesomeIcon icon={faX} onClick={showCart} />
           <h2>Your Cart</h2>
-          <h4>{productCount} item(s)</h4>
+          {/* <h4> item(s)</h4> */}
+          <h4>{value.totalCartNumbers} item(s)</h4>
         </div>
         <div className='cart-item-list'>
           <ul>
             {arrayOfObjectCart
               ? arrayOfObjectCart.map((individual) => {
                   return (
-                    <li>
+                    <li key={individual.id}>
                       <div className='cart-product-img'>
                         <img src={individual.api_featured_image} alt='' />
                       </div>
                       <div className='cart-product-content'>
                         <h3>{individual.name}</h3>
-                        <input
-                          type='number'
-                          min='0'
-                          max='150'
-                          key={individual.key}
-                          value={individual.amout}
-                          onChance={(event) =>
-                            amountChanged(individual, event.target.value)
-                          }
-                        />
-                        {/* <FontAwesomeIcon icon={faMinus} /> */}
-                        <span>{individualProductCount}</span>
-                        {/* <FontAwesomeIcon icon={faPlus} /> */}
-                        <p>${individual.price}</p>
-                        <button>Remove Item</button>
+                        <button
+                          onClick={() => {
+                            decreaseQty(individual)
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faMinus} />
+                        </button>
+                        <span>{individual.qty}</span>
+                        <button
+                          onClick={() => {
+                            increaseQty(individual)
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faPlus} />
+                        </button>
+                        <p>${individual.price * individual.qty}</p>
+                        <button
+                          onClick={() => {
+                            removeItem(individual)
+                          }}
+                        >
+                          Remove Item
+                        </button>
                       </div>
                     </li>
                   )
@@ -52,9 +113,27 @@ const Cart = ({
               : "null"}
           </ul>
         </div>
+          {arrayOfObjectCart ? (
         <div className='totalMoney'>
-          <h4>Your total: $</h4>
+          <p>
+            {/* Merchandise Subtotal <strong>$subtotal</strong> */}
+            Merchandise Subtotal <strong>${value.subtotal}</strong>
+          </p>
+          <p>
+            Shipping & Handling <strong>free</strong>
+          </p>
+          <p>
+            {/* GST/HST Subtital <strong>$taxTotal</strong> */}
+            GST/HST Subtital <strong>${value.taxTotal}</strong>
+          </p>
+          <h4>
+            {/* TOTAL <strong>$FinalTotal</strong> */}
+            TOTAL <strong>${value.finalTotal}</strong>
+          </h4>
         </div>
+          ) : (
+            "Item is not added"
+          )}
       </div>
     </div>
   )

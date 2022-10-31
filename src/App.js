@@ -6,6 +6,7 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import ProductDetails from "./components/ProductDetail"
 import HeaderNav from "./components/HeaderNav"
+import axios from "axios"
 
 import { useState, useEffect } from "react"
 
@@ -17,31 +18,72 @@ function App() {
   const [arrayOfObjectCart, setArrayOfObjectCart] = useState([])
   const [isCartClicked, setIsCartClicked] = useState(false)
 
+
   useEffect(() => {
-    async function getApiData() {
-      const response1 = await fetch(
-        `http://makeup-api.herokuapp.com/api/v1/products.json`
-        )
-        const data1 = await response1.json()
-        const filteredProduct1 = data1
-        .filter((individual) =>individual.currency === "USD" && individual.price !== "0.0" && individual.id !== 1005)
-        .slice(0, 200)
-        product=="placeholder"
-        ?setFilteredArray(filteredProduct1)
-        :setFilteredArray(filteredProduct1.filter(({ product_type }) => product == product_type))
+    const myparams = product==="placeholder"?
+    {}:
+    {
+      product_type: `${product}`
     }
-    getApiData()
+
+    axios
+      .get("http://makeup-api.herokuapp.com/api/v1/products.json", {
+        params: myparams 
+      })
+      .then(function (res) {
+        const filteredProduct1 = res.data
+          .filter(
+            (individual) =>
+              individual.currency === "USD" &&
+              individual.price !== "0.0" &&
+              individual.id !== 1005
+          )
+          .slice(0, 200)
+        product == "placeholder"
+          ? setFilteredArray(filteredProduct1)
+          : setFilteredArray(
+              filteredProduct1.filter(
+                ({ product_type }) => product == product_type
+              )
+            )
+      })
+    
+    // async function getApiData() {
+
+      // const url = "http://makeup-api.herokuapp.com/api/v1/products.json"
+      // url.search = new URLSearchParams({
+      //   "brand": "nyx"
+      // })
+      // const response1 = await fetch(url)
+      // // const response1 = await fetch(
+      // //   `http://makeup-api.herokuapp.com/api/v1/products.json`
+      // //   )
+      //   const data1 = await response1.json()
+      //   console.log(data1);
+        // const filteredProduct1 = data1
+        // .filter((individual) =>individual.currency === "USD" && individual.price !== "0.0" && individual.id !== 1005)
+        // .slice(0, 200)
+        // product=="placeholder"
+        // ?setFilteredArray(filteredProduct1)
+        // :setFilteredArray(filteredProduct1.filter(({ product_type }) => product == product_type))
+    // }
+    // getApiData()
   }, [product])
-  const add = (item) => {
-    setArrayOfObjectCart([...arrayOfObjectCart,{...item, amount: 1}])
+
+  const getIdObject = (product) => {
+    const exist = arrayOfObjectCart.find((x) => x.id === product.id)
+    console.log(exist)
+    if (exist) {
+      const newCartItems = arrayOfObjectCart.map((x) =>
+        x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+      )
+      setArrayOfObjectCart(newCartItems)
+    } else {
+      const newCartItems = [...arrayOfObjectCart, { ...product, qty: 1 }]
+      setArrayOfObjectCart(newCartItems)
+    }
   }
-  //  const showCart = (e) => {
-  //    e.preventDefault()
-  //    setIsCartClicked(!isCartClicked)
-  //  }
-  const amountChanged = () => {
-    console.log("as");
-  }
+
     return (
       <Routes>
         <Route
@@ -50,25 +92,20 @@ function App() {
             <>
               <div className='App'>
                 <HeaderNav
-                  cartId={cartId}
-                  setCartId={setCartId}
                   arrayOfObjectCart={arrayOfObjectCart}
                   setArrayOfObjectCart={setArrayOfObjectCart}
-                  amountChanged={amountChanged}
-                  // showCart={showCart}
+                  isCartClicked={isCartClicked}
+                  setIsCartClicked={setIsCartClicked}
                 />
                 <Header />
                 <Main
                   product={product}
                   setProduct={setProduct}
-                  productId={productId}
                   setProductId={setProductId}
                   filteredArray={filteredArray}
-                  setFilteredArray={setFilteredArray}
-                  cartId={cartId}
-                  setCartId={setCartId}
-                  arrayOfObjectCart={arrayOfObjectCart}
-                  setArrayOfObjectCart={setArrayOfObjectCart}
+                  // setArrayOfObjectCart={setArrayOfObjectCart}
+                  // arrayOfObjectCart={arrayOfObjectCart}
+                  getIdObject={getIdObject}
                 />
                 <Footer />
               </div>
@@ -84,22 +121,10 @@ function App() {
                 <HeaderNav
                   isCartClicked={isCartClicked}
                   setIsCartClicked={setIsCartClicked}
+                  arrayOfObjectCart={arrayOfObjectCart}
+                  setArrayOfObjectCart={setArrayOfObjectCart}
                 />
-                <ProductDetails
-                  isCartClicked={isCartClicked}
-                  setIsCartClicked={setIsCartClicked}
-                  product={product}
-                  setProduct={setProduct}
-                  productId={productId}
-                  setProductId={setProductId}
-                  filteredArray={filteredArray}
-                  setFilteredArray={setFilteredArray}
-                  cartId={cartId}
-                  setCartId={setCartId}
-                  add={add}
-                  // showCart={showCart}
-                  
-                />
+                <ProductDetails getIdObject={getIdObject}/>
                 <Footer />
               </div>
             </>

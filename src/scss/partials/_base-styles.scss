@@ -1,3 +1,7 @@
+html{
+    font-size: 125%;
+}
+
 ul, li, p{
     margin: 0;
     padding: 0;
@@ -22,4 +26,12 @@ li{
 svg{
     font-size: 2rem;
     cursor: pointer;
+    color: black;
+}
+
+p{
+    font-size: clamp(0.7rem,1vw ,1rem);
+}
+button{
+    font-size: clamp(0.7rem,0.8vw ,1rem);
 }

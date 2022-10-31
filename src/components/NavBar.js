@@ -1,9 +1,6 @@
-import { useState, useEffect } from "react"
+
 const NavBar = ({
-  product,
   setProduct,
-  filteredArray,
-  setFilteredArray,
 }) => {
 
   const handleChangeType = (event) => {
@@ -12,14 +9,15 @@ const NavBar = ({
 
   return (
     <nav>
-      <form action=''>
+      <form action='' autoComplete="on">
         <fieldset>
           <input
             type='radio'
             id='allProduct'
             name='type'
-            value="placeholder"
+            value='placeholder'
             onClick={handleChangeType}
+            // checked
           />
           <label htmlFor='allProduct'>View All</label>
           <input

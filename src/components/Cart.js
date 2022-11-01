@@ -83,23 +83,31 @@ const Cart = ({
                       </div>
                       <div className='cart-product-content'>
                         <h3>{individual.name}</h3>
+                        <p>
+                          {individual.description.length > 110
+                            ? individual.description.substring(0, 110) + "..."
+                            : individual.description}
+                        </p>
+                        <div className="numbers-quantity-container">
+                          <button
+                            onClick={() => {
+                              decreaseQty(individual)
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faMinus} />
+                          </button>
+                          <span>{individual.qty}</span>
+                          <button
+                            onClick={() => {
+                              increaseQty(individual)
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faPlus} />
+                          </button>
+                        </div>
+                        <p>${individual.price * individual.qty} USD</p>
                         <button
-                          onClick={() => {
-                            decreaseQty(individual)
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faMinus} />
-                        </button>
-                        <span>{individual.qty}</span>
-                        <button
-                          onClick={() => {
-                            increaseQty(individual)
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faPlus} />
-                        </button>
-                        <p>${individual.price * individual.qty}</p>
-                        <button
+                          className="remove-from-cart"
                           onClick={() => {
                             removeItem(individual)
                           }}
@@ -114,23 +122,26 @@ const Cart = ({
           </ul>
         </div>
           {arrayOfObjectCart ? (
-        <div className='totalMoney'>
-          <p>
-            {/* Merchandise Subtotal <strong>$subtotal</strong> */}
-            Merchandise Subtotal <strong>${value.subtotal}</strong>
-          </p>
-          <p>
-            Shipping & Handling <strong>free</strong>
-          </p>
-          <p>
-            {/* GST/HST Subtital <strong>$taxTotal</strong> */}
-            GST/HST Subtital <strong>${value.taxTotal}</strong>
-          </p>
-          <h4>
-            {/* TOTAL <strong>$FinalTotal</strong> */}
-            TOTAL <strong>${value.finalTotal}</strong>
-          </h4>
-        </div>
+            <div className="cover">
+              <div className='totalMoney'>
+                <p>
+                  {/* Merchandise Subtotal <strong>$subtotal</strong> */}
+                  Merchandise Subtotal <strong>${value.subtotal}</strong>
+                </p>
+                <p>
+                  Shipping & Handling <strong>free</strong>
+                </p>
+                <p>
+                  {/* GST/HST Subtital <strong>$taxTotal</strong> */}
+                  GST/HST Subtital <strong>${value.taxTotal}</strong>
+                </p>
+                <h4>
+                  {/* TOTAL <strong>$FinalTotal</strong> */}
+                  TOTAL ${value.finalTotal} USD
+                </h4>
+              <button>Check Out</button>
+              </div>
+            </div>
           ) : (
             "Item is not added"
           )}

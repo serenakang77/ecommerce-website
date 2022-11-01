@@ -1,14 +1,16 @@
 import "./scss/styles.scss"
 import { Routes, Route } from "react-router-dom"
 // import "./App.css"
-import Main from "./components/Main"
+// import Main from "./components/Main"
+import NavBar from "./components/NavBar"
+import Product from "./components/Product"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import ProductDetails from "./components/ProductDetail"
 import HeaderNav from "./components/HeaderNav"
 import axios from "axios"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 function App() {
   const [product, setProduct] = useState("placeholder")
@@ -17,15 +19,17 @@ function App() {
   const [cartId, setCartId] = useState("")
   const [arrayOfObjectCart, setArrayOfObjectCart] = useState([])
   const [isCartClicked, setIsCartClicked] = useState(false)
-
-
+  const [isHeartClicked, setIsHeartClicked] = useState(false)
+  const [arrayOfObjectWish, setArrayOfObjectWish] = useState([])
+  const scollToRef = useRef();
+  // const [wishListProductId, setWishListProductId] = useState("")
+  
   useEffect(() => {
     const myparams = product==="placeholder"?
     {}:
     {
       product_type: `${product}`
     }
-
     axios
       .get("http://makeup-api.herokuapp.com/api/v1/products.json", {
         params: myparams 
@@ -36,7 +40,13 @@ function App() {
             (individual) =>
               individual.currency === "USD" &&
               individual.price !== "0.0" &&
-              individual.id !== 1005
+              individual.id !== 1005 &&
+              individual.id !== 1004 &&
+              individual.id !== 1003 &&
+              individual.id !== 1002 &&
+              individual.id !== 1001 &&
+              individual.id !== 1000 &&
+              individual.id !== 999
           )
           .slice(0, 200)
         product == "placeholder"
@@ -47,32 +57,10 @@ function App() {
               )
             )
       })
-    
-    // async function getApiData() {
-
-      // const url = "http://makeup-api.herokuapp.com/api/v1/products.json"
-      // url.search = new URLSearchParams({
-      //   "brand": "nyx"
-      // })
-      // const response1 = await fetch(url)
-      // // const response1 = await fetch(
-      // //   `http://makeup-api.herokuapp.com/api/v1/products.json`
-      // //   )
-      //   const data1 = await response1.json()
-      //   console.log(data1);
-        // const filteredProduct1 = data1
-        // .filter((individual) =>individual.currency === "USD" && individual.price !== "0.0" && individual.id !== 1005)
-        // .slice(0, 200)
-        // product=="placeholder"
-        // ?setFilteredArray(filteredProduct1)
-        // :setFilteredArray(filteredProduct1.filter(({ product_type }) => product == product_type))
-    // }
-    // getApiData()
   }, [product])
 
   const getIdObject = (product) => {
     const exist = arrayOfObjectCart.find((x) => x.id === product.id)
-    console.log(exist)
     if (exist) {
       const newCartItems = arrayOfObjectCart.map((x) =>
         x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
@@ -83,6 +71,34 @@ function App() {
       setArrayOfObjectCart(newCartItems)
     }
   }
+  const getWishIdObject = (event, product) => {
+    console.log(event.target);
+    const exist = arrayOfObjectWish.find((x) => x.id === product.id)
+    // If heart is unclick, remove that item from wishList
+    if (exist && event.target.className == `heartAnimation ${product.id} animate`) {
+      const findSelectedProduct = arrayOfObjectWish.filter((item) => item.id != product.id)
+      setArrayOfObjectWish(findSelectedProduct)
+      // If heart is clicked, add that item from wishList
+    }else if (!exist && event.target.className == `heartAnimation ${product.id}`) {
+      const newCartItems = [...arrayOfObjectWish, { ...product }]
+      setArrayOfObjectWish(newCartItems)
+    }
+  }
+
+  const removeFromWish = (e, individual) => {
+    const filteredArray = arrayOfObjectWish.filter(
+      (x) => individual.id !== x.id
+    )
+    console.log(e.target)
+    return setArrayOfObjectWish(filteredArray)
+  }
+  
+  // const find = (e, product) => {
+  //   const exist = arrayOfObjectWish.find((x) => x.id === product.id)
+  //   if(!exist){
+  //     return e.target.className = "heartAnimation animate"
+  //   }
+  // }
 
     return (
       <Routes>
@@ -96,17 +112,32 @@ function App() {
                   setArrayOfObjectCart={setArrayOfObjectCart}
                   isCartClicked={isCartClicked}
                   setIsCartClicked={setIsCartClicked}
-                />
-                <Header />
-                <Main
-                  product={product}
-                  setProduct={setProduct}
-                  setProductId={setProductId}
-                  filteredArray={filteredArray}
-                  // setArrayOfObjectCart={setArrayOfObjectCart}
-                  // arrayOfObjectCart={arrayOfObjectCart}
+                  isHeartClicked={isHeartClicked}
+                  setIsHeartClicked={setIsHeartClicked}
+                  arrayOfObjectWish={arrayOfObjectWish}
+                  setArrayOfObjectWish={setArrayOfObjectWish}
                   getIdObject={getIdObject}
+                  removeFromWish={removeFromWish}
                 />
+                <Header scollToRef={scollToRef} />
+                <main>
+                  <div className='wrapper'>
+                    <NavBar setProduct={setProduct} />
+                    <Product
+                      product={product}
+                      filteredArray={filteredArray}
+                      setProductId={setProductId}
+                      getIdObject={getIdObject}
+                      isHeartClicked={isHeartClicked}
+                      setIsHeartClicked={setIsHeartClicked}
+                      arrayOfObjectWish={arrayOfObjectWish}
+                      setArrayOfObjectWish={setArrayOfObjectWish}
+                      getWishIdObject={getWishIdObject}
+                      scollToRef={scollToRef}
+                      // find={find}
+                    />
+                  </div>
+                </main>
                 <Footer />
               </div>
             </>
@@ -123,8 +154,20 @@ function App() {
                   setIsCartClicked={setIsCartClicked}
                   arrayOfObjectCart={arrayOfObjectCart}
                   setArrayOfObjectCart={setArrayOfObjectCart}
+                  isHeartClicked={isHeartClicked}
+                  setIsHeartClicked={setIsHeartClicked}
+                  arrayOfObjectWish={arrayOfObjectWish}
+                  setArrayOfObjectWish={setArrayOfObjectWish}
+                  removeFromWish={removeFromWish}
                 />
-                <ProductDetails getIdObject={getIdObject}/>
+                <ProductDetails
+                  getIdObject={getIdObject}
+                  isHeartClicked={isHeartClicked}
+                  setIsHeartClicked={setIsHeartClicked}
+                  arrayOfObjectWish={arrayOfObjectWish}
+                  setArrayOfObjectWish={setArrayOfObjectWish}
+                  getWishIdObject={getWishIdObject}
+                />
                 <Footer />
               </div>
             </>

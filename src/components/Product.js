@@ -1,4 +1,4 @@
-// import { useEffect } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 const Product = ({
@@ -6,16 +6,23 @@ const Product = ({
   filteredArray,
   setProductId,
   getIdObject,
-  
+  isHeartClicked,
+  setIsHeartClicked,
+  // wishListProductId,
+  // setWishListProductId,
+  getWishIdObject,
+  scollToRef,
+  find,
 }) => {
   const getId = (individualKey) => {
     return setProductId(individualKey)
   }
-  const capitalizeFirstLowercaseRest = str => {
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-};
+  // const getWishListId = (individualKey) => {
+  //   return setWishListProductId(individualKey)
+  // }
+
   return (
-    <div className='productLists'>
+    <div className='productLists' ref={scollToRef}>
       <ul>
         {product
           ? filteredArray.map((individual) => {
@@ -26,16 +33,34 @@ const Product = ({
                     getId(individual.id)
                   }}
                 >
+                  <span
+                    className={`heartAnimation ${individual.id}`}
+                    onClick={(e) => {
+                      getWishIdObject(e, individual)
+
+                      e.currentTarget.classList.toggle("animate")
+                      // find(e, individual)
+                      // getWishListId(individual.id)
+                    }}
+                  />
                   <Link to={`product/${individual.id}`}>
-                    <img
-                      src={individual.api_featured_image}
-                      alt={individual.name}
-                    />
+                    <div className='product-container'>
+                      <img
+                        src={individual.api_featured_image}
+                        alt={individual.name}
+                      />
+                      <div className='product-detail'>
+                        <p>Product Detail</p>
+                      </div>
+                    </div>
                   </Link>
-                  <p>{capitalizeFirstLowercaseRest(individual.brand)}</p>
                   <p>
-                    {individual.name.length > 27
-                      ? individual.name.substring(0, 27) + "..."
+                    {individual.brand.charAt(0).toUpperCase() +
+                      individual.brand.slice(1).toLowerCase()}
+                  </p>
+                  <p>
+                    {individual.name.length > 20
+                      ? individual.name.substring(0, 20) + "..."
                       : individual.name}
                   </p>
                   <p>$ {individual.price} USD</p>
@@ -49,7 +74,7 @@ const Product = ({
                 </li>
               )
             })
-          : "nill"}
+          : "API Call is not available"}
       </ul>
     </div>
   )

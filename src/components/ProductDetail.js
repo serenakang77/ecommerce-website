@@ -4,31 +4,29 @@ import { faLeftLong } from "@fortawesome/free-solid-svg-icons"
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-const ProductDetails = ({ getIdObject }) => {
+// FOUND THE BUG, IF USER CLICK HEART AND GO TO PRODUCT DETAIL AND COME BACK, HEART REMOVES
+
+
+const ProductDetails = ({
+  getIdObject,
+  isHeartClicked,
+  setIsHeartClicked,
+  getWishIdObject,
+}) => {
   const [singleItem, setSingleItem] = useState([])
   const navigate = useNavigate()
   const { id } = useParams()
 
   useEffect(() => {
     axios
-      .get("http://makeup-api.herokuapp.com/api/v1/products.json", {
-      })
+      .get("http://makeup-api.herokuapp.com/api/v1/products.json", {})
       .then(function (res) {
-        const filteredProduct1 = res.data.filter((individual) => individual.id == id)
-      setSingleItem(filteredProduct1)
+        const filteredProduct1 = res.data.filter(
+          (individual) => individual.id == id
+        )
+        setSingleItem(filteredProduct1)
       })
-    // async function getApiData() {
-    //   const response1 = await fetch(
-    //     `http://makeup-api.herokuapp.com/api/v1/products.json`
-    //   )
-    //   const data1 = await response1.json()
-    //   const filteredProduct1 = data1.filter((individual) => individual.id == id)
-    //   console.log(filteredProduct1)
-    //   setSingleItem(filteredProduct1)
-    // }
-    // getApiData()
   }, [id])
-
 
   return (
     <>
@@ -37,23 +35,40 @@ const ProductDetails = ({ getIdObject }) => {
       ) : (
         <div className='productWrapper productDetail'>
           <div className='productContainer'>
+            <Link to="/">
             <FontAwesomeIcon
               icon={faLeftLong}
-              onClick={() => {
-                navigate(-1)
-              }}
+              // onClick={() => {
+              //   navigate(-1)
+              // }}
             />
-            <h2>{singleItem[0].brand}</h2>
-            <h2>{singleItem[0].name}</h2>
-            <p>${singleItem[0].price}</p>
+            </Link>
+            <div className='one-content'>
+              <h4>
+                {singleItem[0].brand.charAt(0).toUpperCase() +
+                  singleItem[0].brand.slice(1).toLowerCase()}
+              </h4>
+              <h2>{singleItem[0].name}</h2>
+              <h4>${singleItem[0].price}</h4>
+            </div>
             <p>{singleItem[0].description}</p>
-            <button
-              onClick={() => {
-                getIdObject(singleItem[0])
-              }}
-            >
-              Add To Cart
-            </button>
+            <div className="buttons">
+              <button
+                onClick={() => {
+                  getIdObject(singleItem[0])
+                }}
+              >
+                Add To Cart
+              </button>
+              <span
+                className='heartAnimation'
+                onClick={(e) => {
+                  getWishIdObject(e, singleItem[0])
+                  e.currentTarget.classList.toggle("animate")
+                  // getWishListId(individual.id)
+                }}
+              />
+            </div>
           </div>
           <div className='productImageContainer'>
             <img

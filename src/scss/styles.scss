@@ -1,12 +1,13 @@
+@use "partials/setup";
 @use "partials/base-styles";
 @use "partials/header";
 @use "partials/main";
 @use "partials/product";
-@use "partials/cart-container";
+@use "partials/cart-wish-list-styles";
 
 footer{
-  height: 50px;
-  background-color: #fdfcf8;
+  height: 60px;
+  background-color: #e2cac3;
   display: flex;
   justify-content: center;
   align-items: center;

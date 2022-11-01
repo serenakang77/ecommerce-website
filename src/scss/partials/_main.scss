@@ -1,6 +1,6 @@
 main{
     .wrapper{
-        padding-top: 50px;
+        // padding-top: 50px;
         display: flex;
         form{
             width: 120px;
@@ -14,11 +14,14 @@ main{
                 height: 100%;
                 justify-content: space-between;
             }
+            label{
+                cursor: pointer;
+            }
             input{
                 display: none;
             }
             input[type="radio"]:checked + label, label:hover{
-                color: teal;
+                color: #b37866;
 
             }
 
@@ -26,16 +29,17 @@ main{
     }
     .productLists{
         padding-left: 5%;
-        
         ul{
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
         }
         li{
-            width: 19%;
+            width: 23%;
             margin: 0 1% 40px 1%;
-            padding: 2%;
+            padding: 40px 2% 2% 2%;
+            border: 1px solid black;
+            position: relative;
             // background-color: #fff6f3;
             // position: relative;
         }
@@ -45,40 +49,90 @@ main{
             background-color: #e2cac3;
             display: flex;
             padding: 10px 0;
-            width: 80%;
+            width: 115px;
             // margin: 0 ;
             border-radius: 20px;
             justify-content: center;
             font-weight: bold;
             // position: absolute;
-
+            margin-top: 10px;
+        }
+        .product-detail{
+            position: absolute;
+            top: 45%;
+            left: 20%;
+            // top: 45%;
+            // left: 20%;
+            display: none;
+            p{
+                color: black;
+                font-size: 1.2rem;
+            }
+        }
+        .product-container{
+            position: relative;
+            &:hover{
+                .product-detail{
+                    display: block;
+                }
+            }
         }
         img{
             cursor: pointer;
             height: 250px;
             object-fit: cover;
             width: 100%;
-            transition: 0.5s;
             margin-bottom: 10px;
             border-radius: 10px;
             &:hover, &:focus{
                 transform: scale(1.05);
+                opacity: 30%;
+                z-index: 2;
+                position: relative;
             }
         }
         p{
-            // padding-bottom: 7px;
+            &:nth-child(3){
+                line-height: 1.1;
+                font-weight: 600;
+                font-size: clamp(0.6rem, 0.86vw, 0.9rem);
+            }
             &:nth-child(4){
-                padding: 5px 0 15px 0;
+                padding: 0 0 10px 0;
+                font-weight: 500;
+            }
+            &:nth-child(5){
                 font-weight: 700;
             }
-            &:nth-child(2){
-                font-weight: 600;
-                font-size: clamp(0.6rem,0.85vw ,0.9rem);
-                line-height: 1;
-            }
-            &:nth-child(3){
-                line-height: 1.5;
-            }
         }
-    }   
+    }
+    .heartAnimation{
+        position: absolute;
+        top: -30px;
+        right: 10px;
+    }
 }
+
+.heartAnimation {
+background-image: url('../../components/assets/web-heart-animation.png');
+background-repeat: no-repeat;
+background-size: 2900%;
+height: 85px;
+width: 85px;
+margin: 0 auto;
+cursor: pointer;
+}
+
+.animate {
+    animation: heart-burst 1s steps(28) forwards;
+}
+
+@keyframes heart-burst {
+    0% {
+        background-position: left;
+    }
+
+    100% {
+        background-position: right;
+    }
+}   

@@ -46,6 +46,8 @@ main{
         button{
             cursor: pointer;
             border: none;
+            // border: 1px solid #baa59f;
+            border-bottom: 2px solid #baa59f;
             background-color: #e2cac3;
             display: flex;
             padding: 10px 0;
@@ -56,6 +58,10 @@ main{
             font-weight: bold;
             // position: absolute;
             margin-top: 10px;
+            &:active {
+                border-bottom: none;
+                transform: translateY(2px);
+            }
         }
         .product-detail{
             position: absolute;

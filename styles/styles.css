@@ -241,7 +241,7 @@ li {
 }
 
 .wrapper {
-  width: 85%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -325,6 +325,11 @@ header .header-img .header-content button {
   text-align: center;
   border-radius: 35px;
   cursor: pointer;
+  border-bottom: 3px solid #baa59f;
+}
+header .header-img .header-content button:active {
+  border-bottom: none;
+  transform: translateY(3px);
 }
 header .header-img .header-content p {
   line-height: 1.2rem;
@@ -377,6 +382,7 @@ main .productLists li {
 main .productLists button {
   cursor: pointer;
   border: none;
+  border-bottom: 2px solid #baa59f;
   background-color: #e2cac3;
   display: flex;
   padding: 10px 0;
@@ -385,6 +391,10 @@ main .productLists button {
   justify-content: center;
   font-weight: bold;
   margin-top: 10px;
+}
+main .productLists button:active {
+  border-bottom: none;
+  transform: translateY(2px);
 }
 main .productLists .product-detail {
   position: absolute;
@@ -583,6 +593,11 @@ main .heartAnimation {
   border-radius: 20px;
   justify-content: center;
   font-weight: bold;
+  border-bottom: 3px solid #baa59f;
+}
+.cart-container li .cart-product-content .add-to-cart:active, .cart-container li .cart-product-content .remove-from-cart:active, .cart-container li .wish-product-content .add-to-cart:active, .cart-container li .wish-product-content .remove-from-cart:active, .wish-container li .cart-product-content .add-to-cart:active, .wish-container li .cart-product-content .remove-from-cart:active, .wish-container li .wish-product-content .add-to-cart:active, .wish-container li .wish-product-content .remove-from-cart:active {
+  border-bottom: none;
+  transform: translateY(3px);
 }
 .cart-container li .cart-product-content p:nth-child(4), .wish-container li .cart-product-content p:nth-child(4) {
   font-weight: 700;
@@ -602,6 +617,10 @@ main .heartAnimation {
 .cart-container .cart-item-list button, .cart-container .wish-item-list button, .wish-container .cart-item-list button, .wish-container .wish-item-list button {
   border: none;
   background-color: #e2cac3;
+}
+.cart-container .cart-item-list button:active, .cart-container .wish-item-list button:active, .wish-container .cart-item-list button:active, .wish-container .wish-item-list button:active {
+  border-bottom: none;
+  transform: translateY(1px);
 }
 .cart-container .cart-item-list button svg, .cart-container .wish-item-list button svg, .wish-container .cart-item-list button svg, .wish-container .wish-item-list button svg {
   font-size: 1.2rem;
@@ -630,6 +649,11 @@ main .heartAnimation {
   border-radius: 20px;
   justify-content: center;
   font-weight: bold;
+  border-bottom: 3px solid #baa59f;
+}
+.cart-container .totalMoney button:active, .wish-container .totalMoney button:active {
+  border-bottom: none;
+  transform: translateY(3px);
 }
 
 .cover {

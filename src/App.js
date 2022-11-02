@@ -19,7 +19,7 @@ function App() {
   const [isCartClicked, setIsCartClicked] = useState(false)
   const [isHeartClicked, setIsHeartClicked] = useState(false)
   const [arrayOfObjectWish, setArrayOfObjectWish] = useState([])
-
+  const [productId, setProductId] = useState("")
   const scollToRef = useRef();
 
   const [heartButtonStatus, setHeartButtonStatus] = useState(false)
@@ -126,13 +126,6 @@ function App() {
     setFilteredArray(newFilteredArray)
     setArrayOfObjectWish(filteredWishArray)
   }
-  
-  // const find = (e, product) => {
-  //   const exist = arrayOfObjectWish.find((x) => x.id === product.id)
-  //   if(!exist){
-  //     return e.target.className = "heartAnimation animate"
-  //   }
-  // }
 
   const matchWishList = (newItem) => {
     // it will return true if the same item filtered array has wish list set to true
@@ -188,6 +181,7 @@ function App() {
                       heartButtonStatus={heartButtonStatus}
                       setWishList={setWishList}
                       wishList={wishList}
+                      setProductId={setProductId}
                     />
                   </div>
                 </main>

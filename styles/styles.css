@@ -270,12 +270,20 @@ h1 {
   font-size: clamp(1.2rem, 2.7vw, 2rem);
 }
 
+h2 {
+  font-size: clamp(0.9rem, 3vw, 1.8rem);
+}
+
 h3 {
   font-size: clamp(0.9rem, 1vw, 1.8rem);
 }
 
 h4 {
   font-size: clamp(0.9rem, 1vw, 1.6rem);
+}
+
+label {
+  font-size: clamp(0.7rem, 2.7vw, 1.2rem);
 }
 
 .top-nav-container {
@@ -384,7 +392,7 @@ main .productLists {
 }
 main .productLists .loading {
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 150px;
@@ -506,6 +514,7 @@ main .productLists .product-detail {
 main .productLists .product-detail p {
   color: black;
   font-size: 1.2rem;
+  text-align: center;
 }
 main .productLists .product-container {
   position: relative;
@@ -662,7 +671,7 @@ main .heartAnimation {
   height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 5%;
 }
 .productDetail .productContainer svg {
@@ -888,7 +897,7 @@ main .heartAnimation {
   main .productLists li {
     width: 48%;
   }
-  main .productLists .loading {
+  main .loading {
     top: 130%;
     width: 110px;
     height: 110px;
@@ -900,11 +909,26 @@ main .heartAnimation {
   }
 }
 @media screen and (max-width: 550px) {
+  .header-wrapper svg {
+    font-size: 1.4rem;
+  }
+  .top-nav-container .header-wrapper li:nth-child(2) {
+    justify-content: space-around;
+  }
   .cart-container, .wish-container {
     width: 100%;
   }
   .cart-container li .buttons, .wish-container li .buttons {
     flex-direction: column;
+  }
+  .add-to-cart {
+    margin-bottom: 7px;
+  }
+  .cart-container li, .wish-container li {
+    width: 95%;
+  }
+  .cart-container .totalMoney, .wish-container .totalMoney {
+    width: 95%;
   }
   main .wrapper {
     width: 95%;
@@ -914,6 +938,30 @@ main .heartAnimation {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .productWrapper {
+    width: 90%;
+  }
+  .productDetail {
+    flex-direction: column-reverse;
+  }
+  .productDetail .loading {
+    top: 70%;
+    width: 110px;
+    height: 110px;
+    font-size: 14px;
+    line-height: 110px;
+  }
+  .productDetail .productImageContainer {
+    margin: 0;
+    height: 80%;
+  }
+  .productDetail .productContainer {
+    width: 90%;
+    height: 600px;
+  }
+  .productDetail .productContainer button {
+    width: 110px;
   }
 }
 footer {

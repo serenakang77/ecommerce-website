@@ -38,13 +38,13 @@
             li{
                 width: 48%;
             }
-            .loading{
-                top: 130%;
-                width: 110px;
-                height: 110px;
-                font-size: 14px;
-                line-height: 110px;
-            }
+        }
+        .loading{
+            top: 130%;
+            width: 110px;
+            height: 110px;
+            font-size: 14px;
+            line-height: 110px;
         }
     }
     .cart-container, .wish-container{
@@ -53,11 +53,28 @@
 }
 
 @media screen and (max-width: 550px){
+    .header-wrapper{
+        svg{
+            font-size: 1.4rem;
+        }
+    }
+    .top-nav-container .header-wrapper li:nth-child(2){
+        justify-content: space-around;
+    }
     .cart-container, .wish-container{
         width: 100%;
     }
     .cart-container li .buttons, .wish-container li .buttons{
         flex-direction: column;
+    }
+    .add-to-cart{
+        margin-bottom: 7px;
+    }
+    .cart-container li, .wish-container li{
+        width: 95%;
+    }
+    .cart-container .totalMoney, .wish-container .totalMoney{
+        width: 95%;
     }
     main{
         .wrapper{
@@ -69,6 +86,30 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+            }
+        }
+    }
+    .productWrapper{
+        width: 90%;
+    }
+    .productDetail{
+        flex-direction: column-reverse;
+        .loading{
+            top: 70%;
+            width: 110px;
+            height: 110px;
+            font-size: 14px;
+            line-height: 110px;
+        }
+        .productImageContainer{
+            margin: 0;
+            height: 80%;
+        }
+        .productContainer{
+            width: 90%;
+            height: 600px;
+            button{
+                width: 110px;
             }
         }
     }

@@ -29,13 +29,17 @@ const ProductDetails = ({
       .get("https://makeup-api.herokuapp.com/api/v1/products.json", {})
       .then(function (res) {
         const filteredProduct1 = res.data.filter(
-          (individual) => individual.id === id
-        )
+          (individual) => individual.id == id
+          )
+          console.log(id);
+          console.log(filteredProduct1);
         // if this object is loaded from api, set wishlist true if filteredArray has the same wishlist value
-        matchWishList(filteredProduct1[0])
+        // matchWishList(filteredProduct1[0])
         // setInWishList(filteredProduct1[0].inWishList)
         setSingleItem(filteredProduct1)
+        console.log(singleItem);
       })
+  // }, [id])
   }, [matchWishList, id])
 
   return (
@@ -72,26 +76,6 @@ const ProductDetails = ({
                 >
                   Add To Cart
                 </button>
-                {/* <span
-                  className={
-                    // inWishList
-                    heartFunction()
-                      ? `heartAnimation ${singleItem[0].id}` + " animate"
-                      : `heartAnimation ${singleItem[0].id}`
-                  }
-                  onClick={(e) => {
-                    
-                    addOrRemoveFunction(singleItem[0])
-                    setInWishList(!inWishList)
-                    getWishIdObject(e, singleItem[0])
-                    e.currentTarget.classList.toggle("animate")
-                    // setHeartButtonStatus(!heartButtonStatus)
-                    // a++
-
-                    // find(e, individual)
-                    // getWishListId(individual.id)
-                  }}
-                /> */}
               </div>
             </div>
             <div className='productImageContainer'>

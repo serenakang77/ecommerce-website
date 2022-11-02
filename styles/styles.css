@@ -380,6 +380,7 @@ main .wrapper form fieldset {
 }
 main .wrapper form label {
   cursor: pointer;
+  margin-bottom: 10px;
 }
 main .wrapper form input {
   display: none;
@@ -938,6 +939,9 @@ main .heartAnimation {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  main label {
+    margin-bottom: 0;
   }
   .productWrapper {
     width: 90%;

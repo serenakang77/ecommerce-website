@@ -27,6 +27,7 @@ const HeaderNav = ({
   const showWishList = (e) => {
     e.preventDefault()
     setIsHeartClicked(!isHeartClicked)
+    
   }
 
   return (

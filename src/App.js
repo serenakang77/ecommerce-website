@@ -49,6 +49,18 @@ function App() {
               individual.id !== 999
           )
           .slice(0, 200)
+          // inWishList property added
+          filteredProduct1.map((item) => {
+            item.inWishList = false
+            // if this item inWishList array, then set this to true
+            arrayOfObjectWish.filter((x)=> {
+              if(x.id === item.id){
+                console.log("code is here");
+                item.inWishList=true
+              }
+              return x
+            })
+          })
         product == "placeholder"
           ? setFilteredArray(filteredProduct1)
           : setFilteredArray(
@@ -56,7 +68,10 @@ function App() {
                 ({ product_type }) => product == product_type
               )
             )
+           
+
       })
+
   }, [product])
 
   const getIdObject = (product) => {
@@ -72,7 +87,15 @@ function App() {
     }
   }
   const getWishIdObject = (event, product) => {
-    console.log(event.target);
+    // toggle the boolean value
+   product.inWishList=!product.inWishList
+    filteredArray.filter((x)=> {
+      if(x.id===product.id){
+        x.inWishList=product.inWishList
+      }
+      return x
+    })
+    // console.log(event.target);
     const exist = arrayOfObjectWish.find((x) => x.id === product.id)
     // If heart is unclick, remove that item from wishList
     if (exist && event.target.className == `heartAnimation ${product.id} animate`) {
@@ -86,11 +109,22 @@ function App() {
   }
 
   const removeFromWish = (e, individual) => {
-    const filteredArray = arrayOfObjectWish.filter(
-      (x) => individual.id !== x.id
-    )
-    console.log(e.target)
-    return setArrayOfObjectWish(filteredArray)
+    individual.inWishList = false
+    console.log(individual);
+    console.log(filteredArray.includes(individual));
+    const newFilteredArray = filteredArray.filter((x) => {
+      
+      if(x.id=== individual.id){
+        x.inWishList = false
+      }
+      return x
+
+    })
+    const filteredWishArray = arrayOfObjectWish.filter((x) => {
+      return individual.id !== x.id
+    })
+    setFilteredArray(newFilteredArray)
+    setArrayOfObjectWish(filteredWishArray)
   }
   
   // const find = (e, product) => {
@@ -99,6 +133,20 @@ function App() {
   //     return e.target.className = "heartAnimation animate"
   //   }
   // }
+
+  const matchWishList = (newItem) => {
+    // it will return true if the same item filtered array has wish list set to true
+    // let wish = false;
+    filteredArray.filter((x) => {
+      if (x.id === newItem.id) {
+        // send the wishList value of this object
+        newItem.inWishList = x.inWishList
+      }
+      return x
+    })
+    // wish now has the value of the filtered array inWishList
+    return newItem
+  }
 
     return (
       <Routes>
@@ -128,8 +176,8 @@ function App() {
                       filteredArray={filteredArray}
                       setProductId={setProductId}
                       getIdObject={getIdObject}
-                      isHeartClicked={isHeartClicked}
-                      setIsHeartClicked={setIsHeartClicked}
+                      // isHeartClicked={isHeartClicked}
+                      // setIsHeartClicked={setIsHeartClicked}
                       arrayOfObjectWish={arrayOfObjectWish}
                       setArrayOfObjectWish={setArrayOfObjectWish}
                       getWishIdObject={getWishIdObject}
@@ -159,14 +207,16 @@ function App() {
                   arrayOfObjectWish={arrayOfObjectWish}
                   setArrayOfObjectWish={setArrayOfObjectWish}
                   removeFromWish={removeFromWish}
+                  getIdObject={getIdObject}
                 />
                 <ProductDetails
                   getIdObject={getIdObject}
-                  isHeartClicked={isHeartClicked}
-                  setIsHeartClicked={setIsHeartClicked}
+                  // isHeartClicked={isHeartClicked}
+                  // setIsHeartClicked={setIsHeartClicked}
                   arrayOfObjectWish={arrayOfObjectWish}
                   setArrayOfObjectWish={setArrayOfObjectWish}
                   getWishIdObject={getWishIdObject}
+                  matchWishList={matchWishList}
                 />
                 <Footer />
               </div>

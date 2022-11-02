@@ -238,11 +238,13 @@ li {
 .header-wrapper {
   width: 95%;
   margin: 0 auto;
+  max-width: 2000px;
 }
 
 .wrapper {
   width: 90%;
   margin: 0 auto;
+  max-width: 2000px;
 }
 
 .productWrapper {
@@ -257,11 +259,15 @@ svg {
 }
 
 p {
-  font-size: clamp(0.7rem, 1vw, 1rem);
+  font-size: clamp(0.7rem, 1.6vw, 1rem);
 }
 
 button {
   font-size: clamp(0.7rem, 0.8vw, 1rem);
+}
+
+h1 {
+  font-size: clamp(1.2rem, 2.7vw, 2rem);
 }
 
 .top-nav-container {
@@ -289,22 +295,24 @@ button {
 }
 
 header {
-  height: max(100vh, 40rem);
+  height: max(80vh, 40rem);
 }
 header .header-img {
   display: flex;
   margin-top: 40px;
   width: 100%;
-  height: 700px;
+  height: 600px;
+  background-color: #fff6f3;
 }
 header .header-img img {
   width: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+  max-width: 1200px;
+  margin: 0 0 0 auto;
 }
 header .header-img .header-content {
   width: 50%;
-  background-color: #fff6f3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -328,7 +336,6 @@ header .header-img .header-content button {
   border-bottom: 3px solid #baa59f;
 }
 header .header-img .header-content button:active {
-  border-bottom: none;
   transform: translateY(3px);
 }
 header .header-img .header-content p {
@@ -366,6 +373,93 @@ main .wrapper form input[type=radio]:checked + label, main .wrapper form label:h
 }
 main .productLists {
   padding-left: 5%;
+}
+main .productLists .loading {
+  position: absolute;
+  top: 117%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: transparent;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 150px;
+  font-size: 20px;
+  color: #e2cac3;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #e2cac3;
+  box-shadow: 0 0 20px #a78981;
+}
+main .productLists .loading:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid #e2cac3;
+  border-right: 3px solid #e2cac3;
+  border-radius: 50%;
+  -webkit-animation: animateionRotate 2s linear infinite;
+          animation: animateionRotate 2s linear infinite;
+}
+main .productLists .loading span {
+  display: block;
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 50%;
+  width: 50%;
+  height: 4px;
+  background: transparent;
+  transform-origin: left;
+  -webkit-animation: animation 2s linear infinite;
+          animation: animation 2s linear infinite;
+}
+main .productLists .loading span:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #e2cac3;
+  top: -6px;
+  right: -8px;
+  box-shadow: 0 0 20px #e2cac3;
+}
+@-webkit-keyframes animateionRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animateionRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes animation {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
+}
+@keyframes animation {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
 }
 main .productLists ul {
   display: flex;
@@ -430,7 +524,7 @@ main .productLists img:hover, main .productLists img:focus {
 main .productLists p:nth-child(3) {
   line-height: 1.1;
   font-weight: 600;
-  font-size: clamp(0.6rem, 0.86vw, 0.9rem);
+  font-size: clamp(0.6rem, 1.4vw, 0.9rem);
 }
 main .productLists p:nth-child(4) {
   padding: 0 0 10px 0;
@@ -442,7 +536,7 @@ main .productLists p:nth-child(5) {
 main .heartAnimation {
   position: absolute;
   top: -30px;
-  right: 10px;
+  right: -10px;
 }
 
 .heartAnimation {
@@ -478,10 +572,82 @@ main .heartAnimation {
   }
 }
 .productDetail {
+  height: 600px;
   margin: 160px auto 110px auto;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.productDetail .loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: transparent;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 150px;
+  font-size: 20px;
+  color: #e2cac3;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #e2cac3;
+  box-shadow: 0 0 20px #a78981;
+}
+.productDetail .loading:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid #e2cac3;
+  border-right: 3px solid #e2cac3;
+  border-radius: 50%;
+  -webkit-animation: animateionRotate 2s linear infinite;
+          animation: animateionRotate 2s linear infinite;
+}
+.productDetail .loading span {
+  display: block;
+  position: absolute;
+  top: calc(50% - 2px);
+  left: 50%;
+  width: 50%;
+  height: 4px;
+  background: transparent;
+  transform-origin: left;
+  -webkit-animation: animation 2s linear infinite;
+          animation: animation 2s linear infinite;
+}
+.productDetail .loading span:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #e2cac3;
+  top: -6px;
+  right: -8px;
+  box-shadow: 0 0 20px #e2cac3;
+}
+@keyframes animateionRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animation {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
 }
 .productDetail .productContainer {
   width: 50%;
@@ -502,19 +668,30 @@ main .heartAnimation {
   padding-bottom: 10px;
 }
 .productDetail .productContainer button {
-  cursor: pointer;
   border: none;
   background-color: #e2cac3;
-  display: flex;
-  padding: 13px 0;
-  width: 200px;
-  border-radius: 20px;
-  justify-content: center;
+  width: 160px;
+  padding: 20px 0;
   font-weight: bold;
-  margin-top: 10px;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  border-radius: 35px;
+  cursor: pointer;
+  border-bottom: 3px solid #baa59f;
+}
+.productDetail .productContainer button:active {
+  transform: translateY(3px);
+}
+.productDetail .productContainer .heartAnimation {
+  margin: 0;
+  width: 100px;
+  height: 100px;
 }
 .productDetail .productContainer .buttons {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .productDetail .productImageContainer {
   height: 500px;
@@ -556,6 +733,7 @@ main .heartAnimation {
 }
 .cart-container .cart-title svg, .cart-container .wish-title svg, .wish-container .cart-title svg, .wish-container .wish-title svg {
   align-self: flex-start;
+  padding: 5px;
 }
 .cart-container ul, .wish-container ul {
   display: flex;
@@ -662,6 +840,18 @@ main .heartAnimation {
   margin-top: 35px;
 }
 
+@media screen and (max-width: 1100px) {
+  header {
+    height: auto;
+    margin-bottom: 100px;
+  }
+  header .header-img {
+    height: 500px;
+  }
+  main .productLists li {
+    width: 31.3%;
+  }
+}
 footer {
   height: 60px;
   background-color: #e2cac3;

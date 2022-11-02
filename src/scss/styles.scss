@@ -4,6 +4,8 @@
 @use "partials/main";
 @use "partials/product";
 @use "partials/cart-wish-list-styles";
+@use "partials/mixin";
+@use "partials/media";
 
 footer{
   height: 60px;

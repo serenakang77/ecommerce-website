@@ -9,11 +9,15 @@ import axios from "axios"
 
 const ProductDetails = ({
   getIdObject,
-  isHeartClicked,
-  setIsHeartClicked,
+  // isHeartClicked,
+  // setIsHeartClicked,
   getWishIdObject,
+  arrayOfObjectWish,
+  setArrayOfObjectWish,
+  matchWishList,
 }) => {
   const [singleItem, setSingleItem] = useState([])
+  const [inWishList, setInWishList] = useState(false)
   const navigate = useNavigate()
   const { id } = useParams()
 
@@ -24,60 +28,79 @@ const ProductDetails = ({
         const filteredProduct1 = res.data.filter(
           (individual) => individual.id == id
         )
+        // if this object is loaded from api, set wishlist true if filteredArray has the same wishlist value
+        matchWishList(filteredProduct1[0])
+        setInWishList(filteredProduct1[0].inWishList)
         setSingleItem(filteredProduct1)
+
       })
   }, [id])
 
+
   return (
     <>
-      {singleItem.length === 0 ? (
-        "Null"
-      ) : (
-        <div className='productWrapper productDetail'>
-          <div className='productContainer'>
-            <Link to="/">
-            <FontAwesomeIcon
-              icon={faLeftLong}
-              // onClick={() => {
-              //   navigate(-1)
-              // }}
-            />
-            </Link>
-            <div className='one-content'>
-              <h4>
-                {singleItem[0].brand.charAt(0).toUpperCase() +
-                  singleItem[0].brand.slice(1).toLowerCase()}
-              </h4>
-              <h2>{singleItem[0].name}</h2>
-              <h4>${singleItem[0].price}</h4>
+      <div className='productWrapper productDetail'>
+        {singleItem.length === 0 ? (
+          <div className='loading'>
+            Loading
+            <span></span>
+          </div>
+        ) : (
+          <>
+            <div className='productContainer'>
+              <Link to='/'>
+                <FontAwesomeIcon
+                  icon={faLeftLong}
+                  // onClick={() => {
+                  //   navigate(-1)
+                  // }}
+                />
+              </Link>
+              <div className='one-content'>
+                <h4>
+                  {singleItem[0].brand.charAt(0).toUpperCase() +
+                    singleItem[0].brand.slice(1).toLowerCase()}
+                </h4>
+                <h2>{singleItem[0].name}</h2>
+                <h4>${singleItem[0].price}</h4>
+              </div>
+              <p>{singleItem[0].description}</p>
+              <div className='buttons'>
+                <button
+                  onClick={() => {
+                    getIdObject(singleItem[0])
+                  }}
+                >
+                  Add To Cart
+                </button>
+                <span
+                  className={
+                    // inWishList
+                    singleItem[0].inWishList
+                      ? `heartAnimation ${singleItem[0].id}` + " animate"
+                      : `heartAnimation ${singleItem[0].id}`
+                  }
+                  onClick={(e) => {
+                    setInWishList(!inWishList)
+                    getWishIdObject(e, singleItem[0])
+                    e.currentTarget.classList.toggle("animate")
+                    // a++
+
+                    // find(e, individual)
+                    // getWishListId(individual.id)
+                  }}
+                />
+              </div>
             </div>
-            <p>{singleItem[0].description}</p>
-            <div className="buttons">
-              <button
-                onClick={() => {
-                  getIdObject(singleItem[0])
-                }}
-              >
-                Add To Cart
-              </button>
-              <span
-                className='heartAnimation'
-                onClick={(e) => {
-                  getWishIdObject(e, singleItem[0])
-                  e.currentTarget.classList.toggle("animate")
-                  // getWishListId(individual.id)
-                }}
+            <div className='productImageContainer'>
+              <img
+                src={singleItem[0].api_featured_image}
+                alt={singleItem[0].name}
               />
             </div>
-          </div>
-          <div className='productImageContainer'>
-            <img
-              src={singleItem[0].api_featured_image}
-              alt={singleItem[0].name}
-            />
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </div>
     </>
   )
 }

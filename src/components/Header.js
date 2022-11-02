@@ -5,7 +5,7 @@ const Header = ({ scollToRef }) => {
       <div className='header-img'>
         <img src={header} alt='' />
         <div className='header-content'>
-          <h1>Experience natural beauty of your skin</h1>
+          <h1>Experience Natural Beauty Of Your Skin</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit atque
             adipisci eos distinctio aut impedit iusto consectetur assumenda
@@ -13,9 +13,7 @@ const Header = ({ scollToRef }) => {
             deleniti aliquid! Lorem ipsum dolor sit amet consectetur adipisicing
             elit. Excepturi hic nam similique eum. Eaque, praesentium nemo
             officia eos possimus voluptatum. Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Asperiores, nisi! Lorem ipsum dolor
-            sit, amet consectetur adipisicing elit. Eum, quam illo id nesciunt
-            maiores repellendus magni debitis magnam amet ratione.
+            consectetur adipisicing elit. Asperiores, nisi! Lorem ipsum dolor.
           </p>
           <button onClick={() => scollToRef.current.scrollIntoView()}>Shop Now</button>
           {/* <Link to='#productLists'>Shop Now</Link> */}

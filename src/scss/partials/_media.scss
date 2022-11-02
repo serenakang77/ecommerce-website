@@ -1,0 +1,17 @@
+@media screen and (max-width: 1100px){
+    header{
+        height: auto;
+        margin-bottom: 100px;
+        .header-img{
+            height: 500px;
+        }
+    }
+    main{
+        .productLists{
+            li{
+                width: 31.3%;
+            }
+        }
+    }
+}
+

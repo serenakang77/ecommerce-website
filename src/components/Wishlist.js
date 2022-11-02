@@ -6,7 +6,6 @@ const Wishlist = ({
   arrayOfObjectWish,
   getIdObject,
   removeFromWish,
-  setHeartButtonStatus,
   setWishList,
   wishList,
 }) => {
@@ -54,7 +53,6 @@ const Wishlist = ({
                             className='remove-from-wish'
                             onClick={(e) => {
                                 removeFromWish(e, individual)
-                                setHeartButtonStatus(false)
                                 removeFromNewWish(individual)
                             }}
                             >

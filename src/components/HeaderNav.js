@@ -16,7 +16,6 @@ const HeaderNav = ({
   arrayOfObjectWish,
   getIdObject,
   removeFromWish,
-  setHeartButtonStatus,
   setWishList,
   wishList,
 }) => {
@@ -47,7 +46,6 @@ const HeaderNav = ({
           showWishList={showWishList}
           getIdObject={getIdObject}
           removeFromWish={removeFromWish}
-          setHeartButtonStatus={setHeartButtonStatus}
           setWishList={setWishList}
           wishList={wishList}
         />

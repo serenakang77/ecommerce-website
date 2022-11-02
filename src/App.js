@@ -17,10 +17,7 @@ function App() {
   const [isCartClicked, setIsCartClicked] = useState(false)
   const [isHeartClicked, setIsHeartClicked] = useState(false)
   const [arrayOfObjectWish, setArrayOfObjectWish] = useState([])
-  const [productId, setProductId] = useState("")
   const scollToRef = useRef();
-
-  const [heartButtonStatus, setHeartButtonStatus] = useState(false)
   const [wishList, setWishList] = useState([])
 
   useEffect(() => {
@@ -138,7 +135,6 @@ function App() {
                   arrayOfObjectWish={arrayOfObjectWish}
                   getIdObject={getIdObject}
                   removeFromWish={removeFromWish}
-                  setHeartButtonStatus={setHeartButtonStatus}
                   setWishList={setWishList}
                   wishList={wishList}
                 />
@@ -153,7 +149,6 @@ function App() {
                       scollToRef={scollToRef}
                       setWishList={setWishList}
                       wishList={wishList}
-                      setProductId={setProductId}
                     />
                   </div>
                 </main>
@@ -178,7 +173,6 @@ function App() {
                   arrayOfObjectWish={arrayOfObjectWish}
                   removeFromWish={removeFromWish}
                   getIdObject={getIdObject}
-                  setHeartButtonStatus={setHeartButtonStatus}
                   setWishList={setWishList}
                   wishList={wishList}
                 />

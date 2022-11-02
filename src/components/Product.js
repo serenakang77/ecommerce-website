@@ -2,16 +2,13 @@ import { Link } from "react-router-dom"
 
 const Product = ({
   filteredArray,
-  setProductId,
   getIdObject,
   getWishIdObject,
   scollToRef,
   setWishList,
   wishList
 }) => {
-  const getId = (individualKey) => {
-    return setProductId(individualKey)
-  }
+
   const addOrRemoveFromWishList = (item) => {
     if(wishList.indexOf(item) === -1){
       const newArray = [...wishList];
@@ -33,9 +30,6 @@ const Product = ({
             return (
               <li
                 key={individual.id}
-                onClick={() => {
-                  getId(individual.id)
-                }}
               >
                 <span
                   className={

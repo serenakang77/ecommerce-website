@@ -33,7 +33,7 @@ function App() {
       product_type: `${product}`
     }
     axios
-      .get("http://makeup-api.herokuapp.com/api/v1/products.json", {
+      .get("https://makeup-api.herokuapp.com/api/v1/products.json", {
         params: myparams 
       })
       .then(function (res) {

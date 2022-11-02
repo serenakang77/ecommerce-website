@@ -26,7 +26,7 @@ const ProductDetails = ({
 
   useEffect(() => {
     axios
-      .get("http://makeup-api.herokuapp.com/api/v1/products.json", {})
+      .get("https://makeup-api.herokuapp.com/api/v1/products.json", {})
       .then(function (res) {
         const filteredProduct1 = res.data.filter(
           (individual) => individual.id === id

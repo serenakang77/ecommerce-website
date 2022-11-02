@@ -7,13 +7,13 @@ import axios from "axios"
 const ProductDetails = ({getIdObject}) => {
   const [singleItem, setSingleItem] = useState([])
   const { id } = useParams()
-
   useEffect(() => {
     axios
       .get("https://makeup-api.herokuapp.com/api/v1/products.json", {})
       .then(function (res) {
         const filteredProduct1 = res.data.filter(
-          (individual) => individual.id == id
+          (individual) => {
+            return individual.id === +id}
           )
         setSingleItem(filteredProduct1)
       })

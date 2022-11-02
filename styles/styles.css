@@ -271,11 +271,11 @@ h1 {
 }
 
 h3 {
-  font-size: clamp(1rem, 1.8vw, 1.8rem);
+  font-size: clamp(0.9rem, 1vw, 1.8rem);
 }
 
 h4 {
-  font-size: clamp(1rem, 1.6vw, 1.8rem);
+  font-size: clamp(0.9rem, 1vw, 1.6rem);
 }
 
 .top-nav-container {
@@ -384,7 +384,7 @@ main .productLists {
 }
 main .productLists .loading {
   position: absolute;
-  top: 117%;
+  top: 120%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 150px;
@@ -478,7 +478,6 @@ main .productLists li {
   width: 23%;
   margin: 0 1% 40px 1%;
   padding: 40px 2% 2% 2%;
-  border: 1px solid black;
   position: relative;
 }
 main .productLists button {
@@ -532,11 +531,12 @@ main .productLists img:hover, main .productLists img:focus {
 main .productLists p:nth-child(3) {
   line-height: 1.1;
   font-weight: 600;
-  font-size: clamp(0.6rem, 1.8vw, 0.9rem);
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
 }
 main .productLists p:nth-child(4) {
   padding: 0 0 10px 0;
   font-weight: 500;
+  font-size: clamp(0.7rem, 3.8vw, 0.9rem);
 }
 main .productLists p:nth-child(5) {
   font-weight: 700;
@@ -865,6 +865,9 @@ main .heartAnimation {
   header .header-img {
     height: 500px;
   }
+  main .productLists .loading {
+    top: 95%;
+  }
   main .productLists li {
     width: 31.3%;
   }
@@ -886,10 +889,31 @@ main .heartAnimation {
     width: 48%;
   }
   main .productLists .loading {
-    top: 100%;
+    top: 130%;
+    width: 110px;
+    height: 110px;
+    font-size: 14px;
+    line-height: 110px;
   }
   .cart-container, .wish-container {
     width: 80%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .cart-container, .wish-container {
+    width: 100%;
+  }
+  .cart-container li .buttons, .wish-container li .buttons {
+    flex-direction: column;
+  }
+  main .wrapper {
+    width: 95%;
+  }
+  main .productLists li {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 footer {

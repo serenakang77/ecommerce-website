@@ -1,6 +1,5 @@
 @mixin loadingPage($top){
     .loading{
-    //   position:relative;
       position:absolute;
       top:$top;
       left:50%;
@@ -8,7 +7,6 @@
       width:150px;
       height:150px;
       background:transparent;
-    //   border:3px solid #e2cac3;
       border-radius:50%;
       text-align:center;
       line-height:150px;
@@ -69,6 +67,5 @@
           transform:rotate(405deg);
         }
       }
-
     }
 }

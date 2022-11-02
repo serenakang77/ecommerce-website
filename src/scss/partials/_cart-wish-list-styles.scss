@@ -8,7 +8,6 @@
     z-index: 20;
 }
 .cart-container, .wish-container{
-    // z-index: 20;
     position: fixed;
     width: 60%;
     right: 0;
@@ -62,7 +61,6 @@
             display: flex;
             padding: 10px 0;
             width: 130px;
-            // margin: 0 ;
             border-radius: 20px;
             justify-content: center;
             font-weight: bold;
@@ -152,11 +150,3 @@
     padding-top: 20px;
     margin-top: 35px;
 }
-
-// button{
-//         border-bottom: 3px solid #baa59f;
-//         &:active {
-//             border-bottom: none;
-//             transform: translateY(3px);
-//         }
-// }

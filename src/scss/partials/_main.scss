@@ -2,7 +2,6 @@
 
 main{
     .wrapper{
-        // padding-top: 50px;
         display: flex;
         form{
             width: 120px;
@@ -24,13 +23,11 @@ main{
             }
             input[type="radio"]:checked + label, label:hover{
                 color: #b37866;
-
             }
-
         }
     }
     .productLists{
-        @include loadingPage(117%);
+        @include loadingPage(120%);
         padding-left: 5%;
         ul{
             display: flex;
@@ -41,25 +38,19 @@ main{
             width: 23%;
             margin: 0 1% 40px 1%;
             padding: 40px 2% 2% 2%;
-            border: 1px solid black;
             position: relative;
-            // background-color: #fff6f3;
-            // position: relative;
         }
         button{
             cursor: pointer;
             border: none;
-            // border: 1px solid #baa59f;
             border-bottom: 2px solid #baa59f;
             background-color: #e2cac3;
             display: flex;
             padding: 10px 0;
             width: 115px;
-            // margin: 0 ;
             border-radius: 20px;
             justify-content: center;
             font-weight: bold;
-            // position: absolute;
             margin-top: 10px;
             &:active {
                 border-bottom: none;
@@ -70,8 +61,6 @@ main{
             position: absolute;
             top: 45%;
             left: 20%;
-            // top: 45%;
-            // left: 20%;
             display: none;
             p{
                 color: black;
@@ -104,11 +93,12 @@ main{
             &:nth-child(3){
                 line-height: 1.1;
                 font-weight: 600;
-                font-size: clamp(0.6rem, 1.8vw, 0.9rem);
+                font-size: clamp(0.7rem, 2vw, 0.9rem);
             }
             &:nth-child(4){
                 padding: 0 0 10px 0;
                 font-weight: 500;
+                font-size: clamp(0.7rem, 3.8vw, 0.9rem);
             }
             &:nth-child(5){
                 font-weight: 700;
@@ -140,7 +130,6 @@ cursor: pointer;
     0% {
         background-position: left;
     }
-
     100% {
         background-position: right;
     }

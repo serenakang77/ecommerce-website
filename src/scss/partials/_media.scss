@@ -8,6 +8,9 @@
     }
     main{
         .productLists{
+            .loading{
+                top: 95%;
+            }
             li{
                 width: 31.3%;
             }
@@ -36,11 +39,37 @@
                 width: 48%;
             }
             .loading{
-                top: 100%;
+                top: 130%;
+                width: 110px;
+                height: 110px;
+                font-size: 14px;
+                line-height: 110px;
             }
         }
     }
     .cart-container, .wish-container{
         width: 80%;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .cart-container, .wish-container{
+        width: 100%;
+    }
+    .cart-container li .buttons, .wish-container li .buttons{
+        flex-direction: column;
+    }
+    main{
+        .wrapper{
+            width: 95%;
+        }
+        .productLists{
+            li{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     }
 }

@@ -1,7 +1,5 @@
 
-const NavBar = ({
-  setProduct,
-}) => {
+const NavBar = ({setProduct}) => {
 
   const handleChangeType = (event) => {
     return setProduct(event.target.value)
@@ -17,7 +15,6 @@ const NavBar = ({
             name='type'
             value='placeholder'
             onClick={handleChangeType}
-            // checked
           />
           <label htmlFor='allProduct'>View All</label>
           <input

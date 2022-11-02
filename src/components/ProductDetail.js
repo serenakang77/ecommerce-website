@@ -4,24 +4,8 @@ import { faLeftLong } from "@fortawesome/free-solid-svg-icons"
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-// FOUND THE BUG, IF USER CLICK HEART AND GO TO PRODUCT DETAIL AND COME BACK, HEART REMOVES
-
-
-const ProductDetails = ({
-  getIdObject,
-  // isHeartClicked,
-  // setIsHeartClicked,
-  getWishIdObject,
-  arrayOfObjectWish,
-  setArrayOfObjectWish,
-  matchWishList,
-  setHeartButtonStatus,
-  heartButtonStatus,
-  setWishList,
-  wishList,
-}) => {
+const ProductDetails = ({getIdObject}) => {
   const [singleItem, setSingleItem] = useState([])
-  // const [inWishList, setInWishList] = useState(false)
   const { id } = useParams()
 
   useEffect(() => {
@@ -31,16 +15,9 @@ const ProductDetails = ({
         const filteredProduct1 = res.data.filter(
           (individual) => individual.id == id
           )
-          console.log(id);
-          console.log(filteredProduct1);
-        // if this object is loaded from api, set wishlist true if filteredArray has the same wishlist value
-        // matchWishList(filteredProduct1[0])
-        // setInWishList(filteredProduct1[0].inWishList)
         setSingleItem(filteredProduct1)
-        console.log(singleItem);
       })
-  // }, [id])
-  }, [matchWishList, id])
+  }, [id])
 
   return (
     <>

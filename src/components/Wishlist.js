@@ -2,12 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faX } from "@fortawesome/free-solid-svg-icons"
 
 const Wishlist = ({
-  showCart,
-  isHeartClicked,
   showWishList,
   arrayOfObjectWish,
   getIdObject,
-  setArrayOfObjectWish,
   removeFromWish,
   setHeartButtonStatus,
   setWishList,
@@ -15,7 +12,6 @@ const Wishlist = ({
 }) => {
 
     const removeFromNewWish = (item) => {
-        console.log(item)
         const newArray = [...wishList]
         const temp = newArray.filter((x) => x.id !== item.id)
         setWishList(temp)
@@ -27,7 +23,6 @@ const Wishlist = ({
         <div className='wish-title'>
           <FontAwesomeIcon icon={faX} onClick={showWishList} />
           <h2>Your Wishlist</h2>
-          {/* <h4>{value.totalCartNumbers} item(s)</h4> */}
         </div>
         <div className='wish-item-list'>
           <ul>
@@ -70,7 +65,7 @@ const Wishlist = ({
                     </li>
                   )
                 })
-              : "null"}
+              : "Wish item is not added"}
           </ul>
         </div>
       </div>

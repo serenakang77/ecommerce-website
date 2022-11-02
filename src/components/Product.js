@@ -1,20 +1,11 @@
 import { Link } from "react-router-dom"
 
 const Product = ({
-  product,
   filteredArray,
   setProductId,
   getIdObject,
-  // isHeartClicked,
-  // setIsHeartClicked,
-  // wishListProductId,
-  // setWishListProductId,
   getWishIdObject,
   scollToRef,
-  arrayOfObjectWish,
-  find,
-  setHeartButtonStatus,
-  heartButtonStatus,
   setWishList,
   wishList
 }) => {
@@ -34,10 +25,6 @@ const Product = ({
     }
   }
 
-  
-  // const getWishListId = (individualKey) => {
-  //   return setWishListProductId(individualKey)
-  // }
   return (
     <div className='productLists' ref={scollToRef}>
       <ul>
@@ -50,11 +37,6 @@ const Product = ({
                   getId(individual.id)
                 }}
               >
-                {/* {
-                  arrayOfObjectWish.includes(individual)?
-                  console.log("is there")
-                  : console.log("")
-                } */}
                 <span
                   className={
                     individual.inWishList
@@ -66,9 +48,6 @@ const Product = ({
                     e.currentTarget.classList.toggle("animate")
                     // if it is in wishList, remove, else add
                     addOrRemoveFromWishList(individual)
-                    // setWishList
-                    // find(e, individual)
-                    // getWishListId(individual.id)
                   }}
                 />
                 <Link to={`product/${individual.id}`}>

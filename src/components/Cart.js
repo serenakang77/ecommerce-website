@@ -35,7 +35,7 @@ const Cart = ({
     )
     setArrayOfObjectCart(newCartItems)
   }
-  // ERROR(If cart is empty, it gives the error, handle this!!!!)
+
   useEffect(() => {
     if(arrayOfObjectCart.length >0){
       const totalCartNumbers = arrayOfObjectCart
@@ -69,7 +69,6 @@ const Cart = ({
         <div className='cart-title'>
           <FontAwesomeIcon icon={faX} onClick={showCart} />
           <h2>Your Cart</h2>
-          {/* <h4> item(s)</h4> */}
           <h4>{value.totalCartNumbers} item(s)</h4>
         </div>
         <div className='cart-item-list'>
@@ -125,18 +124,15 @@ const Cart = ({
             <div className="cover">
               <div className='totalMoney'>
                 <p>
-                  {/* Merchandise Subtotal <strong>$subtotal</strong> */}
                   Merchandise Subtotal <strong>${value.subtotal}</strong>
                 </p>
                 <p>
                   Shipping & Handling <strong>free</strong>
                 </p>
                 <p>
-                  {/* GST/HST Subtital <strong>$taxTotal</strong> */}
                   GST/HST Subtital <strong>${value.taxTotal}</strong>
                 </p>
                 <h4>
-                  {/* TOTAL <strong>$FinalTotal</strong> */}
                   TOTAL ${value.finalTotal} USD
                 </h4>
               <button>Check Out</button>

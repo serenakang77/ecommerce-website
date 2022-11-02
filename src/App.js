@@ -1,7 +1,5 @@
 import "./scss/styles.scss"
 import { Routes, Route } from "react-router-dom"
-// import "./App.css"
-// import Main from "./components/Main"
 import NavBar from "./components/NavBar"
 import Product from "./components/Product"
 import Header from "./components/Header"
@@ -23,7 +21,6 @@ function App() {
   const scollToRef = useRef();
 
   const [heartButtonStatus, setHeartButtonStatus] = useState(false)
-  // adding a newState for wishList
   const [wishList, setWishList] = useState([])
 
   useEffect(() => {
@@ -51,10 +48,8 @@ function App() {
               individual.id !== 999
           )
           .slice(0, 200)
-          // inWishList property added
           filteredProduct1.map((item) => {
             item.inWishList = false
-            // if this item inWishList array, then set this to true
             arrayOfObjectWish.filter((x)=> {
               if(x.id === item.id){
                 item.inWishList=true
@@ -97,7 +92,6 @@ function App() {
       }
       return x
     })
-    // console.log(event.target);
     const exist = arrayOfObjectWish.find((x) => x.id === product.id)
     // If heart is unclick, remove that item from wishList
     if (exist && event.target.className === `heartAnimation ${product.id} animate`) {
@@ -127,20 +121,6 @@ function App() {
     setArrayOfObjectWish(filteredWishArray)
   }
 
-  const matchWishList = (newItem) => {
-    // it will return true if the same item filtered array has wish list set to true
-    // let wish = false;
-    filteredArray.filter((x) => {
-      if (x.id === newItem.id) {
-        // send the wishList value of this object
-        newItem.inWishList = x.inWishList
-      }
-      return x
-    })
-    // wish now has the value of the filtered array inWishList
-    return newItem
-  }
-
     return (
       <Routes>
         <Route
@@ -156,7 +136,6 @@ function App() {
                   isHeartClicked={isHeartClicked}
                   setIsHeartClicked={setIsHeartClicked}
                   arrayOfObjectWish={arrayOfObjectWish}
-                  setArrayOfObjectWish={setArrayOfObjectWish}
                   getIdObject={getIdObject}
                   removeFromWish={removeFromWish}
                   setHeartButtonStatus={setHeartButtonStatus}
@@ -168,17 +147,10 @@ function App() {
                   <div className='wrapper'>
                     <NavBar setProduct={setProduct} />
                     <Product
-                      product={product}
                       filteredArray={filteredArray}
                       getIdObject={getIdObject}
-                      // isHeartClicked={isHeartClicked}
-                      // setIsHeartClicked={setIsHeartClicked}
-                      arrayOfObjectWish={arrayOfObjectWish}
-                      setArrayOfObjectWish={setArrayOfObjectWish}
                       getWishIdObject={getWishIdObject}
                       scollToRef={scollToRef}
-                      setHeartButtonStatus={setHeartButtonStatus}
-                      heartButtonStatus={heartButtonStatus}
                       setWishList={setWishList}
                       wishList={wishList}
                       setProductId={setProductId}
@@ -204,26 +176,13 @@ function App() {
                   isHeartClicked={isHeartClicked}
                   setIsHeartClicked={setIsHeartClicked}
                   arrayOfObjectWish={arrayOfObjectWish}
-                  setArrayOfObjectWish={setArrayOfObjectWish}
                   removeFromWish={removeFromWish}
                   getIdObject={getIdObject}
                   setHeartButtonStatus={setHeartButtonStatus}
                   setWishList={setWishList}
                   wishList={wishList}
                 />
-                <ProductDetails
-                  getIdObject={getIdObject}
-                  // isHeartClicked={isHeartClicked}
-                  // setIsHeartClicked={setIsHeartClicked}
-                  arrayOfObjectWish={arrayOfObjectWish}
-                  setArrayOfObjectWish={setArrayOfObjectWish}
-                  getWishIdObject={getWishIdObject}
-                  matchWishList={matchWishList}
-                  setHeartButtonStatus={setHeartButtonStatus}
-                  heartButtonStatus={heartButtonStatus}
-                  setWishList={setWishList}
-                  wishList={wishList}
-                />
+                <ProductDetails getIdObject={getIdObject}/>
                 <Footer />
               </div>
             </>
@@ -235,63 +194,3 @@ function App() {
 
 export default App
 
-// PSEUDO CODE
-
-// Inside of App.js, make useState for product type value & product type array and pass it to children component by props
-// Get the API data by async function and useEffect when the product type value changes
-
-// Make a Header Component
-// Inside of header component(Logo, cart, currency)
-// Stretch goal: Make Carousels in header to see some popular list of items
-// Stretch goal: put USD and CAD(header nav) and convert all the price with calculated price
-// stretch goal: put onClick button on cart icon, so it appears the cart page with the list of items, total price, and button for check out
-
-// Make a Main Component 
-
-// Make a Nav component inside of Main component(input, label) 
-// make input element that has a value of specific type, so we can use event.target.value to update productype value
-
-// Make Product component inside of Main component
-// Make itemList component inside of Main component
-// map through individual array, and show individual item image, item name, price, add to cart button
-
-// useEffect(() => {
-//   async function getApiData() {
-//     const response = await fetch(
-//       `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${product}`
-//     )
-//     const data = await response.json()
-//     const filteredProduct = data
-//       .filter((individual) => individual.currency === "USD" && individual.price !== "0.0")
-//       .slice(0, 24)
-//     return setproductArray(filteredProduct)
-//   }
-//   getApiData()
-// }, [product])
-
-
-
-
-
-
-
-
-
-        // useEffect(() => {
-          //   async function getApiData() {
-            //     const response = await fetch(
-              //       `http://makeup-api.herokuapp.com/api/v1/products.json`
-              //     )
-              //     const data = await response.json()
-              //     const filteredProduct = data
-  //       .filter(
-    //         (individual) =>
-    //           individual.currency === "USD" && individual.price !== "0.0"
-    //       )
-    //       .slice(0, 150)
-    //     return setproductArray(filteredProduct)
-    //   }
-    //   getApiData()
-    // }, [product])
-    
-    // getApiData()

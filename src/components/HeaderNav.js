@@ -5,8 +5,7 @@ import Cart from "./Cart";
 import Wishlist from "./Wishlist"
 import logo from "./assets/logo.webp";
 import { Link } from "react-router-dom";
-// import {useState} from "react";
-// import { Routes, Route } from "react-router-dom"
+
 const HeaderNav = ({
   arrayOfObjectCart,
   setArrayOfObjectCart,
@@ -15,7 +14,6 @@ const HeaderNav = ({
   isHeartClicked,
   setIsHeartClicked,
   arrayOfObjectWish,
-  setArrayOfObjectWish,
   getIdObject,
   removeFromWish,
   setHeartButtonStatus,
@@ -36,20 +34,16 @@ const HeaderNav = ({
     <>
       {isCartClicked ? (
         <Cart
-          // isCartClicked={isCartClicked}
-          // setIsCartClicked={setIsCartClicked}
           showCart={showCart}
           arrayOfObjectCart={arrayOfObjectCart}
           setArrayOfObjectCart={setArrayOfObjectCart}
         />
       ) : (
-        "null"
+        "Cart is not clicked"
       )}
       {isHeartClicked ? (
         <Wishlist
           arrayOfObjectWish={arrayOfObjectWish}
-          setArrayOfObjectWish={setArrayOfObjectWish}
-          isHeartClicked={isHeartClicked}
           showWishList={showWishList}
           getIdObject={getIdObject}
           removeFromWish={removeFromWish}
@@ -58,7 +52,7 @@ const HeaderNav = ({
           wishList={wishList}
         />
       ) : (
-        "null"
+        "Heart button is not clicked"
       )}
 
       <nav className='top-nav-container'>

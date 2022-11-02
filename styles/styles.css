@@ -964,6 +964,11 @@ main .heartAnimation {
     width: 110px;
   }
 }
+@media screen and (max-width: 400px) {
+  header .header-img {
+    margin-top: 0;
+  }
+}
 footer {
   height: 60px;
   background-color: #e2cac3;

@@ -55,7 +55,7 @@
                 }
             }
             
-            .add-to-cart, .remove-from-cart{
+            .add-to-cart, .remove-from-cart, .remove-from-wish{
             cursor: pointer;
             border: none;
             background-color: #e2cac3;
@@ -71,9 +71,16 @@
                 border-bottom: none;
                 transform: translateY(3px);
             }
-            // position: absolute;
-            // margin-top: 10px;
+        }
+        .add-to-cart, .remove-from-wish{
+                width: 100px;
             }
+        .add-to-cart{
+            margin-right: 10px;
+        }
+        }
+        .buttons{
+            display: flex;
         }
         .cart-product-content{
             p{

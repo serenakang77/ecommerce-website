@@ -46,24 +46,26 @@ const Wishlist = ({
                             : individual.description}
                         </p>
                         <p>${individual.price} USD</p>
-                        <button
-                          className='add-to-cart'
-                          onClick={() => {
-                            getIdObject(individual)
-                          }}
-                        >
-                          Add To Cart
-                        </button>
-                        <button
-                          className='remove-from-wish'
-                          onClick={(e) => {
-                            removeFromWish(e, individual)
-                            setHeartButtonStatus(false)
-                            removeFromNewWish(individual)
-                          }}
-                        >
-                          Remove It
-                        </button>
+                        <div className="buttons">
+                            <button
+                            className='add-to-cart'
+                            onClick={() => {
+                                getIdObject(individual)
+                            }}
+                            >
+                            Add To Cart
+                            </button>
+                            <button
+                            className='remove-from-wish'
+                            onClick={(e) => {
+                                removeFromWish(e, individual)
+                                setHeartButtonStatus(false)
+                                removeFromNewWish(individual)
+                            }}
+                            >
+                            Remove It
+                            </button>
+                        </div>
                       </div>
                     </li>
                   )

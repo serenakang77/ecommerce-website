@@ -270,6 +270,14 @@ h1 {
   font-size: clamp(1.2rem, 2.7vw, 2rem);
 }
 
+h3 {
+  font-size: clamp(1rem, 1.8vw, 1.8rem);
+}
+
+h4 {
+  font-size: clamp(1rem, 1.6vw, 1.8rem);
+}
+
 .top-nav-container {
   background-color: #e2cac3;
   position: fixed;
@@ -761,7 +769,7 @@ main .heartAnimation {
 .cart-container li .cart-product-content p:nth-child(3), .cart-container li .wish-product-content p:nth-child(3), .wish-container li .cart-product-content p:nth-child(3), .wish-container li .wish-product-content p:nth-child(3) {
   font-weight: 700;
 }
-.cart-container li .cart-product-content .add-to-cart, .cart-container li .cart-product-content .remove-from-cart, .cart-container li .wish-product-content .add-to-cart, .cart-container li .wish-product-content .remove-from-cart, .wish-container li .cart-product-content .add-to-cart, .wish-container li .cart-product-content .remove-from-cart, .wish-container li .wish-product-content .add-to-cart, .wish-container li .wish-product-content .remove-from-cart {
+.cart-container li .cart-product-content .add-to-cart, .cart-container li .cart-product-content .remove-from-cart, .cart-container li .cart-product-content .remove-from-wish, .cart-container li .wish-product-content .add-to-cart, .cart-container li .wish-product-content .remove-from-cart, .cart-container li .wish-product-content .remove-from-wish, .wish-container li .cart-product-content .add-to-cart, .wish-container li .cart-product-content .remove-from-cart, .wish-container li .cart-product-content .remove-from-wish, .wish-container li .wish-product-content .add-to-cart, .wish-container li .wish-product-content .remove-from-cart, .wish-container li .wish-product-content .remove-from-wish {
   cursor: pointer;
   border: none;
   background-color: #e2cac3;
@@ -773,9 +781,18 @@ main .heartAnimation {
   font-weight: bold;
   border-bottom: 3px solid #baa59f;
 }
-.cart-container li .cart-product-content .add-to-cart:active, .cart-container li .cart-product-content .remove-from-cart:active, .cart-container li .wish-product-content .add-to-cart:active, .cart-container li .wish-product-content .remove-from-cart:active, .wish-container li .cart-product-content .add-to-cart:active, .wish-container li .cart-product-content .remove-from-cart:active, .wish-container li .wish-product-content .add-to-cart:active, .wish-container li .wish-product-content .remove-from-cart:active {
+.cart-container li .cart-product-content .add-to-cart:active, .cart-container li .cart-product-content .remove-from-cart:active, .cart-container li .cart-product-content .remove-from-wish:active, .cart-container li .wish-product-content .add-to-cart:active, .cart-container li .wish-product-content .remove-from-cart:active, .cart-container li .wish-product-content .remove-from-wish:active, .wish-container li .cart-product-content .add-to-cart:active, .wish-container li .cart-product-content .remove-from-cart:active, .wish-container li .cart-product-content .remove-from-wish:active, .wish-container li .wish-product-content .add-to-cart:active, .wish-container li .wish-product-content .remove-from-cart:active, .wish-container li .wish-product-content .remove-from-wish:active {
   border-bottom: none;
   transform: translateY(3px);
+}
+.cart-container li .cart-product-content .add-to-cart, .cart-container li .cart-product-content .remove-from-wish, .cart-container li .wish-product-content .add-to-cart, .cart-container li .wish-product-content .remove-from-wish, .wish-container li .cart-product-content .add-to-cart, .wish-container li .cart-product-content .remove-from-wish, .wish-container li .wish-product-content .add-to-cart, .wish-container li .wish-product-content .remove-from-wish {
+  width: 100px;
+}
+.cart-container li .cart-product-content .add-to-cart, .cart-container li .wish-product-content .add-to-cart, .wish-container li .cart-product-content .add-to-cart, .wish-container li .wish-product-content .add-to-cart {
+  margin-right: 10px;
+}
+.cart-container li .buttons, .wish-container li .buttons {
+  display: flex;
 }
 .cart-container li .cart-product-content p:nth-child(4), .wish-container li .cart-product-content p:nth-child(4) {
   font-weight: 700;
@@ -870,6 +887,9 @@ main .heartAnimation {
   }
   main .productLists .loading {
     top: 100%;
+  }
+  .cart-container, .wish-container {
+    width: 80%;
   }
 }
 footer {

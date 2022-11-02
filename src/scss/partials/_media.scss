@@ -9,7 +9,7 @@
     main{
         .productLists{
             .loading{
-                top: 95%;
+                // top: 95%;
             }
             li{
                 width: 31.3%;
@@ -40,7 +40,7 @@
             }
         }
         .loading{
-            top: 130%;
+            // top: 130%;
             width: 110px;
             height: 110px;
             font-size: 14px;
@@ -98,7 +98,6 @@
     .productDetail{
         flex-direction: column-reverse;
         .loading{
-            top: 70%;
             width: 110px;
             height: 110px;
             font-size: 14px;

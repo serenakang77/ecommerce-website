@@ -1,7 +1,7 @@
 @use "./mixin" as *;
 
 .productDetail{
-    @include loadingPage(50%);
+    @include loadingPage();
     height: 800px;
     margin: 160px auto 110px auto;
     display: flex;

@@ -29,12 +29,13 @@ main{
         }
     }
     .productLists{
-        @include loadingPage(100%);
+        @include loadingPage();
         padding-left: 5%;
         ul{
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
+            // position: relative;
         }
         li{
             width: 23%;

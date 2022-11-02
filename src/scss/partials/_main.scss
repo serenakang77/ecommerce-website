@@ -1,6 +1,7 @@
 @use "./mixin" as *;
 
 main{
+    min-height: 500px;
     .wrapper{
         display: flex;
         form{

@@ -361,6 +361,9 @@ header .header-heart {
   margin-right: 50px;
 }
 
+main {
+  min-height: 500px;
+}
 main .wrapper {
   display: flex;
 }

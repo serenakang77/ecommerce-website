@@ -14,17 +14,35 @@ const Product = ({
   scollToRef,
   arrayOfObjectWish,
   find,
+  setHeartButtonStatus,
+  heartButtonStatus,
+  setWishList,
+  wishList
 }) => {
   const getId = (individualKey) => {
     return setProductId(individualKey)
   }
+  const addOrRemoveFromWishList = (item) => {
+    if(wishList.indexOf(item) == -1){
+      const newArray = [...wishList];
+      newArray.push(item);
+      setWishList(newArray);
+
+    }else{
+      const newArray = [...wishList];
+      const temp = newArray.filter((x) => x.id !== item.id)
+      setWishList(temp);
+    }
+  }
+
+  
   // const getWishListId = (individualKey) => {
   //   return setWishListProductId(individualKey)
   // }
   return (
     <div className='productLists' ref={scollToRef}>
       <ul>
-        {filteredArray.length !==0 ? (
+        {filteredArray.length !== 0 ? (
           filteredArray.map((individual) => {
             return (
               <li
@@ -47,7 +65,9 @@ const Product = ({
                   onClick={(e) => {
                     getWishIdObject(e, individual)
                     e.currentTarget.classList.toggle("animate")
-
+                    // if it is in wishList, remove, else add
+                    addOrRemoveFromWishList(individual)
+                    // setWishList
                     // find(e, individual)
                     // getWishListId(individual.id)
                   }}

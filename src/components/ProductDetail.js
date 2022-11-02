@@ -15,6 +15,10 @@ const ProductDetails = ({
   arrayOfObjectWish,
   setArrayOfObjectWish,
   matchWishList,
+  setHeartButtonStatus,
+  heartButtonStatus,
+  setWishList,
+  wishList,
 }) => {
   const [singleItem, setSingleItem] = useState([])
   const [inWishList, setInWishList] = useState(false)
@@ -32,11 +36,33 @@ const ProductDetails = ({
         matchWishList(filteredProduct1[0])
         setInWishList(filteredProduct1[0].inWishList)
         setSingleItem(filteredProduct1)
-
       })
   }, [id])
-
-
+  const heartFunction = () => {
+    // return true if wishlist contains object
+    console.log(id, wishList);
+    wishList.filter((x) => {
+      console.log(x.id, x.id==id);
+      if(x.id === id){
+        
+        return true
+      }
+      return false
+    })
+  }
+  const addOrRemoveFunction = (item) => {
+    
+    if (wishList.indexOf(item) == -1) {
+      const newArray = [...wishList]
+      newArray.push(item)
+      setWishList(newArray)
+    } else {
+      const newArray = [...wishList]
+      const temp = newArray.filter((x) => x.id !== item.id)
+      setWishList(temp)
+    }
+   
+  }
   return (
     <>
       <div className='productWrapper productDetail'>
@@ -73,23 +99,26 @@ const ProductDetails = ({
                 >
                   Add To Cart
                 </button>
-                <span
+                {/* <span
                   className={
                     // inWishList
-                    singleItem[0].inWishList
+                    heartFunction()
                       ? `heartAnimation ${singleItem[0].id}` + " animate"
                       : `heartAnimation ${singleItem[0].id}`
                   }
                   onClick={(e) => {
+                    
+                    addOrRemoveFunction(singleItem[0])
                     setInWishList(!inWishList)
                     getWishIdObject(e, singleItem[0])
                     e.currentTarget.classList.toggle("animate")
+                    // setHeartButtonStatus(!heartButtonStatus)
                     // a++
 
                     // find(e, individual)
                     // getWishListId(individual.id)
                   }}
-                />
+                /> */}
               </div>
             </div>
             <div className='productImageContainer'>

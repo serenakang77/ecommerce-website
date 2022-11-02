@@ -18,6 +18,9 @@ const HeaderNav = ({
   setArrayOfObjectWish,
   getIdObject,
   removeFromWish,
+  setHeartButtonStatus,
+  setWishList,
+  wishList,
 }) => {
   const showCart = (e) => {
     e.preventDefault()
@@ -27,7 +30,6 @@ const HeaderNav = ({
   const showWishList = (e) => {
     e.preventDefault()
     setIsHeartClicked(!isHeartClicked)
-    
   }
 
   return (
@@ -51,6 +53,9 @@ const HeaderNav = ({
           showWishList={showWishList}
           getIdObject={getIdObject}
           removeFromWish={removeFromWish}
+          setHeartButtonStatus={setHeartButtonStatus}
+          setWishList={setWishList}
+          wishList={wishList}
         />
       ) : (
         "null"

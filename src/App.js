@@ -21,9 +21,14 @@ function App() {
   const [isCartClicked, setIsCartClicked] = useState(false)
   const [isHeartClicked, setIsHeartClicked] = useState(false)
   const [arrayOfObjectWish, setArrayOfObjectWish] = useState([])
+
   const scollToRef = useRef();
   // const [wishListProductId, setWishListProductId] = useState("")
-  
+  // state to set heartbutton
+  const [heartButtonStatus, setHeartButtonStatus] = useState(false)
+  // adding a newState for wishList
+  const [wishList, setWishList] = useState([])
+
   useEffect(() => {
     const myparams = product==="placeholder"?
     {}:
@@ -110,8 +115,6 @@ function App() {
 
   const removeFromWish = (e, individual) => {
     individual.inWishList = false
-    console.log(individual);
-    console.log(filteredArray.includes(individual));
     const newFilteredArray = filteredArray.filter((x) => {
       
       if(x.id=== individual.id){
@@ -166,6 +169,9 @@ function App() {
                   setArrayOfObjectWish={setArrayOfObjectWish}
                   getIdObject={getIdObject}
                   removeFromWish={removeFromWish}
+                  setHeartButtonStatus={setHeartButtonStatus}
+                  setWishList={setWishList}
+                  wishList={wishList}
                 />
                 <Header scollToRef={scollToRef} />
                 <main>
@@ -182,7 +188,10 @@ function App() {
                       setArrayOfObjectWish={setArrayOfObjectWish}
                       getWishIdObject={getWishIdObject}
                       scollToRef={scollToRef}
-                      // find={find}
+                      setHeartButtonStatus={setHeartButtonStatus}
+                      heartButtonStatus={heartButtonStatus}
+                      setWishList={setWishList}
+                      wishList={wishList}
                     />
                   </div>
                 </main>
@@ -208,6 +217,9 @@ function App() {
                   setArrayOfObjectWish={setArrayOfObjectWish}
                   removeFromWish={removeFromWish}
                   getIdObject={getIdObject}
+                  setHeartButtonStatus={setHeartButtonStatus}
+                  setWishList={setWishList}
+                  wishList={wishList}
                 />
                 <ProductDetails
                   getIdObject={getIdObject}
@@ -217,6 +229,10 @@ function App() {
                   setArrayOfObjectWish={setArrayOfObjectWish}
                   getWishIdObject={getWishIdObject}
                   matchWishList={matchWishList}
+                  setHeartButtonStatus={setHeartButtonStatus}
+                  heartButtonStatus={heartButtonStatus}
+                  setWishList={setWishList}
+                  wishList={wishList}
                 />
                 <Footer />
               </div>

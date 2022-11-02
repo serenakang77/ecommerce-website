@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLeftLong } from "@fortawesome/free-solid-svg-icons"
 import { useState, useEffect } from "react"
@@ -21,8 +21,7 @@ const ProductDetails = ({
   wishList,
 }) => {
   const [singleItem, setSingleItem] = useState([])
-  const [inWishList, setInWishList] = useState(false)
-  const navigate = useNavigate()
+  // const [inWishList, setInWishList] = useState(false)
   const { id } = useParams()
 
   useEffect(() => {
@@ -30,39 +29,15 @@ const ProductDetails = ({
       .get("http://makeup-api.herokuapp.com/api/v1/products.json", {})
       .then(function (res) {
         const filteredProduct1 = res.data.filter(
-          (individual) => individual.id == id
+          (individual) => individual.id === id
         )
         // if this object is loaded from api, set wishlist true if filteredArray has the same wishlist value
         matchWishList(filteredProduct1[0])
-        setInWishList(filteredProduct1[0].inWishList)
+        // setInWishList(filteredProduct1[0].inWishList)
         setSingleItem(filteredProduct1)
       })
-  }, [id])
-  const heartFunction = () => {
-    // return true if wishlist contains object
-    console.log(id, wishList);
-    wishList.filter((x) => {
-      console.log(x.id, x.id==id);
-      if(x.id === id){
-        
-        return true
-      }
-      return false
-    })
-  }
-  const addOrRemoveFunction = (item) => {
-    
-    if (wishList.indexOf(item) == -1) {
-      const newArray = [...wishList]
-      newArray.push(item)
-      setWishList(newArray)
-    } else {
-      const newArray = [...wishList]
-      const temp = newArray.filter((x) => x.id !== item.id)
-      setWishList(temp)
-    }
-   
-  }
+  }, [matchWishList, id])
+
   return (
     <>
       <div className='productWrapper productDetail'>
@@ -77,9 +52,7 @@ const ProductDetails = ({
               <Link to='/'>
                 <FontAwesomeIcon
                   icon={faLeftLong}
-                  // onClick={() => {
-                  //   navigate(-1)
-                  // }}
+
                 />
               </Link>
               <div className='one-content'>

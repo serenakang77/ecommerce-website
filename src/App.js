@@ -15,16 +15,13 @@ import { useState, useEffect, useRef } from "react"
 function App() {
   const [product, setProduct] = useState("placeholder")
   const [filteredArray, setFilteredArray] = useState([])
-  const [productId, setProductId] = useState("")
-  const [cartId, setCartId] = useState("")
   const [arrayOfObjectCart, setArrayOfObjectCart] = useState([])
   const [isCartClicked, setIsCartClicked] = useState(false)
   const [isHeartClicked, setIsHeartClicked] = useState(false)
   const [arrayOfObjectWish, setArrayOfObjectWish] = useState([])
 
   const scollToRef = useRef();
-  // const [wishListProductId, setWishListProductId] = useState("")
-  // state to set heartbutton
+
   const [heartButtonStatus, setHeartButtonStatus] = useState(false)
   // adding a newState for wishList
   const [wishList, setWishList] = useState([])
@@ -60,24 +57,24 @@ function App() {
             // if this item inWishList array, then set this to true
             arrayOfObjectWish.filter((x)=> {
               if(x.id === item.id){
-                console.log("code is here");
                 item.inWishList=true
               }
               return x
             })
+            return item
           })
-        product == "placeholder"
+        product === "placeholder"
           ? setFilteredArray(filteredProduct1)
           : setFilteredArray(
               filteredProduct1.filter(
-                ({ product_type }) => product == product_type
+                ({ product_type }) => product === product_type
               )
             )
            
 
       })
 
-  }, [product])
+  }, [arrayOfObjectWish, product])
 
   const getIdObject = (product) => {
     const exist = arrayOfObjectCart.find((x) => x.id === product.id)
@@ -103,11 +100,11 @@ function App() {
     // console.log(event.target);
     const exist = arrayOfObjectWish.find((x) => x.id === product.id)
     // If heart is unclick, remove that item from wishList
-    if (exist && event.target.className == `heartAnimation ${product.id} animate`) {
-      const findSelectedProduct = arrayOfObjectWish.filter((item) => item.id != product.id)
+    if (exist && event.target.className === `heartAnimation ${product.id} animate`) {
+      const findSelectedProduct = arrayOfObjectWish.filter((item) => item.id !== product.id)
       setArrayOfObjectWish(findSelectedProduct)
       // If heart is clicked, add that item from wishList
-    }else if (!exist && event.target.className == `heartAnimation ${product.id}`) {
+    }else if (!exist && event.target.className === `heartAnimation ${product.id}`) {
       const newCartItems = [...arrayOfObjectWish, { ...product }]
       setArrayOfObjectWish(newCartItems)
     }
@@ -180,7 +177,6 @@ function App() {
                     <Product
                       product={product}
                       filteredArray={filteredArray}
-                      setProductId={setProductId}
                       getIdObject={getIdObject}
                       // isHeartClicked={isHeartClicked}
                       // setIsHeartClicked={setIsHeartClicked}

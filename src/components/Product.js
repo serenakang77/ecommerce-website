@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Link } from "react-router-dom"
 
 const Product = ({
@@ -23,7 +22,7 @@ const Product = ({
     return setProductId(individualKey)
   }
   const addOrRemoveFromWishList = (item) => {
-    if(wishList.indexOf(item) == -1){
+    if(wishList.indexOf(item) === -1){
       const newArray = [...wishList];
       newArray.push(item);
       setWishList(newArray);
@@ -59,7 +58,7 @@ const Product = ({
                 <span
                   className={
                     individual.inWishList
-                      ? `heartAnimation ${individual.id}` + " animate"
+                      ? `heartAnimation ${individual.id} animate`
                       : `heartAnimation ${individual.id}`
                   }
                   onClick={(e) => {

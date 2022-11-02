@@ -10,7 +10,7 @@ const Cart = ({
   const [value, setValue] = useState({})
   const removeItem = (product) => {
     const findSelectedProduct = arrayOfObjectCart.filter(
-      (item) => item.id != product.id
+      (item) => item.id !== product.id
     )
     setArrayOfObjectCart(findSelectedProduct)
   }

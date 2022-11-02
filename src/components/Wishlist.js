@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faX } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useState } from "react"
 
 const Wishlist = ({
   showCart,

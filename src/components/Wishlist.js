@@ -6,15 +6,7 @@ const Wishlist = ({
   arrayOfObjectWish,
   getIdObject,
   removeFromWish,
-  setWishList,
-  wishList,
 }) => {
-
-    const removeFromNewWish = (item) => {
-        const newArray = [...wishList]
-        const temp = newArray.filter((x) => x.id !== item.id)
-        setWishList(temp)
-    }
 
   return (
     <div className='dark-background'>
@@ -51,9 +43,8 @@ const Wishlist = ({
                             </button>
                             <button
                             className='remove-from-wish'
-                            onClick={(e) => {
-                                removeFromWish(e, individual)
-                                removeFromNewWish(individual)
+                            onClick={() => {
+                                removeFromWish(individual)
                             }}
                             >
                             Remove It

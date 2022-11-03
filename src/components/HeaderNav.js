@@ -16,8 +16,6 @@ const HeaderNav = ({
   arrayOfObjectWish,
   getIdObject,
   removeFromWish,
-  setWishList,
-  wishList,
 }) => {
   const showCart = (e) => {
     e.preventDefault()
@@ -46,8 +44,6 @@ const HeaderNav = ({
           showWishList={showWishList}
           getIdObject={getIdObject}
           removeFromWish={removeFromWish}
-          setWishList={setWishList}
-          wishList={wishList}
         />
       ) : (
         "Heart button is not clicked"

@@ -5,22 +5,7 @@ const Product = ({
   getIdObject,
   getWishIdObject,
   scollToRef,
-  setWishList,
-  wishList
 }) => {
-
-  const addOrRemoveFromWishList = (item) => {
-    if(wishList.indexOf(item) === -1){
-      const newArray = [...wishList];
-      newArray.push(item);
-      setWishList(newArray);
-
-    }else{
-      const newArray = [...wishList];
-      const temp = newArray.filter((x) => x.id !== item.id)
-      setWishList(temp);
-    }
-  }
 
   return (
     <div className='productLists' ref={scollToRef}>
@@ -40,8 +25,6 @@ const Product = ({
                   onClick={(e) => {
                     getWishIdObject(e, individual)
                     e.currentTarget.classList.toggle("animate")
-                    // if it is in wishList, remove, else add
-                    addOrRemoveFromWishList(individual)
                   }}
                 />
                 <Link to={`product/${individual.id}`}>

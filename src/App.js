@@ -11,24 +11,32 @@ import axios from "axios"
 import { useState, useEffect, useRef } from "react"
 
 function App() {
+  // Choose product type
   const [product, setProduct] = useState("placeholder")
+  // Filtered array with right product type
   const [filteredArray, setFilteredArray] = useState([])
+  // Array of Object that is inside of Cart
   const [arrayOfObjectCart, setArrayOfObjectCart] = useState([])
+  // Check if cart is clicked or not
   const [isCartClicked, setIsCartClicked] = useState(false)
+  // Check if heart is clicked or not
   const [isHeartClicked, setIsHeartClicked] = useState(false)
+  // Array of Object that is inside of WishList
   const [arrayOfObjectWish, setArrayOfObjectWish] = useState([])
-  const scollToRef = useRef();
-  const [wishList, setWishList] = useState([])
+
+  const scollToRef = useRef()
 
   useEffect(() => {
-    const myparams = product==="placeholder"?
-    {}:
-    {
-      product_type: `${product}`
-    }
+    // if product State is placeholder which is default value of All product, do not set any params, else set product_type to be selected value
+    const myparams =
+      product === "placeholder"
+        ? {}
+        : {
+            product_type: `${product}`,
+          }
     axios
       .get("https://makeup-api.herokuapp.com/api/v1/products.json", {
-        params: myparams 
+        params: myparams,
       })
       .then(function (res) {
         const filteredProduct1 = res.data
@@ -45,16 +53,19 @@ function App() {
               individual.id !== 999
           )
           .slice(0, 200)
-          filteredProduct1.map((item) => {
-            item.inWishList = false
-            arrayOfObjectWish.filter((x)=> {
-              if(x.id === item.id){
-                item.inWishList=true
-              }
-              return x
-            })
-            return item
+        filteredProduct1.map((item) => {
+          // add the property inWishList default value as false for all objects
+          item.inWishList = false
+          arrayOfObjectWish.filter((x) => {
+            if (x.id === item.id) {
+              // if that object is inside of inWishList, set the value to be true
+              item.inWishList = true
+            }
+            return x
           })
+          return item
+        })
+        // if product is placeholder(All product), set the array state to be filteredProduct1 so it can show all data, if not, filter it to specific product_type endpoint
         product === "placeholder"
           ? setFilteredArray(filteredProduct1)
           : setFilteredArray(
@@ -62,14 +73,12 @@ function App() {
                 ({ product_type }) => product === product_type
               )
             )
-           
-
       })
-
   }, [arrayOfObjectWish, product])
 
   const getIdObject = (product) => {
     const exist = arrayOfObjectCart.find((x) => x.id === product.id)
+    // find if object is already in Cart, if it exists, add qty to be +1 when user clicks the add to cart button. If it does not exist, add new property for qty:1
     if (exist) {
       const newCartItems = arrayOfObjectCart.map((x) =>
         x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
@@ -81,36 +90,47 @@ function App() {
     }
   }
   const getWishIdObject = (event, product) => {
-    // toggle the boolean value
-   product.inWishList=!product.inWishList
-    filteredArray.filter((x)=> {
-      if(x.id===product.id){
-        x.inWishList=product.inWishList
+    // when user clicks the heart, set inWishList to be opposite boolean value
+    product.inWishList = !product.inWishList
+    // change the filteredArray inWishList property value to be same as the argument object property value
+    filteredArray.filter((individual) => {
+      if (individual.id === product.id) {
+        individual.inWishList = product.inWishList
       }
-      return x
+      return individual
     })
+
     const exist = arrayOfObjectWish.find((x) => x.id === product.id)
     // If heart is unclick, remove that item from wishList
-    if (exist && event.target.className === `heartAnimation ${product.id} animate`) {
-      const findSelectedProduct = arrayOfObjectWish.filter((item) => item.id !== product.id)
+    if (
+      exist &&
+      event.target.className === `heartAnimation ${product.id} animate`
+    ) {
+      const findSelectedProduct = arrayOfObjectWish.filter(
+        (item) => item.id !== product.id
+      )
       setArrayOfObjectWish(findSelectedProduct)
-      // If heart is clicked, add that item from wishList
-    }else if (!exist && event.target.className === `heartAnimation ${product.id}`) {
+      // If heart is clicked, add that object inside of arrayOfObjectWish and change the state value
+    } else if (
+      !exist &&
+      event.target.className === `heartAnimation ${product.id}`
+    ) {
       const newCartItems = [...arrayOfObjectWish, { ...product }]
       setArrayOfObjectWish(newCartItems)
     }
   }
 
-  const removeFromWish = (e, individual) => {
+  const removeFromWish = (individual) => {
+    // If user clicks the remove button from wishList, set inWishList property value to be false
     individual.inWishList = false
-    const newFilteredArray = filteredArray.filter((x) => {
-      
-      if(x.id=== individual.id){
-        x.inWishList = false
+    const newFilteredArray = filteredArray.filter((product) => {
+      // set the specific object inWishList property to be false, so that heart can be toggled automatically(favorite or unfavorite) - set ternary operator for className in product.js(for heart filled)
+      if (product.id === individual.id) {
+        product.inWishList = false
       }
-      return x
-
+      return product
     })
+    // remove specific object item from wishList when user clicks remove button
     const filteredWishArray = arrayOfObjectWish.filter((x) => {
       return individual.id !== x.id
     })
@@ -118,72 +138,66 @@ function App() {
     setArrayOfObjectWish(filteredWishArray)
   }
 
-    return (
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <div className='App'>
-                <HeaderNav
-                  arrayOfObjectCart={arrayOfObjectCart}
-                  setArrayOfObjectCart={setArrayOfObjectCart}
-                  isCartClicked={isCartClicked}
-                  setIsCartClicked={setIsCartClicked}
-                  isHeartClicked={isHeartClicked}
-                  setIsHeartClicked={setIsHeartClicked}
-                  arrayOfObjectWish={arrayOfObjectWish}
-                  getIdObject={getIdObject}
-                  removeFromWish={removeFromWish}
-                  setWishList={setWishList}
-                  wishList={wishList}
-                />
-                <Header scollToRef={scollToRef} />
-                <main>
-                  <div className='wrapper'>
-                    <NavBar setProduct={setProduct} />
-                    <Product
-                      filteredArray={filteredArray}
-                      getIdObject={getIdObject}
-                      getWishIdObject={getWishIdObject}
-                      scollToRef={scollToRef}
-                      setWishList={setWishList}
-                      wishList={wishList}
-                    />
-                  </div>
-                </main>
-                <Footer />
-              </div>
-            </>
-          }
-        />
+  return (
+    <Routes>
+      <Route
+        path='/'
+        element={
+          <>
+            <div className='App'>
+              <HeaderNav
+                arrayOfObjectCart={arrayOfObjectCart}
+                setArrayOfObjectCart={setArrayOfObjectCart}
+                isCartClicked={isCartClicked}
+                setIsCartClicked={setIsCartClicked}
+                isHeartClicked={isHeartClicked}
+                setIsHeartClicked={setIsHeartClicked}
+                arrayOfObjectWish={arrayOfObjectWish}
+                getIdObject={getIdObject}
+                removeFromWish={removeFromWish}
+              />
+              <Header scollToRef={scollToRef} />
+              <main>
+                <div className='wrapper'>
+                  <NavBar setProduct={setProduct} />
+                  <Product
+                    filteredArray={filteredArray}
+                    getIdObject={getIdObject}
+                    getWishIdObject={getWishIdObject}
+                    scollToRef={scollToRef}
+                  />
+                </div>
+              </main>
+              <Footer />
+            </div>
+          </>
+        }
+      />
 
-        <Route
-          path='/product/:id'
-          element={
-            <>
-              <div className='App'>
-                <HeaderNav
-                  isCartClicked={isCartClicked}
-                  setIsCartClicked={setIsCartClicked}
-                  arrayOfObjectCart={arrayOfObjectCart}
-                  setArrayOfObjectCart={setArrayOfObjectCart}
-                  isHeartClicked={isHeartClicked}
-                  setIsHeartClicked={setIsHeartClicked}
-                  arrayOfObjectWish={arrayOfObjectWish}
-                  removeFromWish={removeFromWish}
-                  getIdObject={getIdObject}
-                  setWishList={setWishList}
-                  wishList={wishList}
-                />
-                <ProductDetails getIdObject={getIdObject}/>
-                <Footer />
-              </div>
-            </>
-          }
-        />
-      </Routes>
-    )
+      <Route
+        path='/product/:id'
+        element={
+          <>
+            <div className='App'>
+              <HeaderNav
+                isCartClicked={isCartClicked}
+                setIsCartClicked={setIsCartClicked}
+                arrayOfObjectCart={arrayOfObjectCart}
+                setArrayOfObjectCart={setArrayOfObjectCart}
+                isHeartClicked={isHeartClicked}
+                setIsHeartClicked={setIsHeartClicked}
+                arrayOfObjectWish={arrayOfObjectWish}
+                removeFromWish={removeFromWish}
+                getIdObject={getIdObject}
+              />
+              <ProductDetails getIdObject={getIdObject} />
+              <Footer />
+            </div>
+          </>
+        }
+      />
+    </Routes>
+  )
 }
 
 export default App

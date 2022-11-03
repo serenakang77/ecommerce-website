@@ -5,6 +5,7 @@ import Cart from "./Cart";
 import Wishlist from "./Wishlist"
 import logo from "./assets/logo.webp";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"
 
 const HeaderNav = ({
   arrayOfObjectCart,
@@ -17,6 +18,9 @@ const HeaderNav = ({
   getIdObject,
   removeFromWish,
 }) => {
+  // change the value to be object so that it includes properties like total Cart numbers, subtotal, taxTotal, finalTotal 
+  const [value, setValue] = useState({})
+
   const showCart = (e) => {
     e.preventDefault()
     setIsCartClicked(!isCartClicked)
@@ -27,6 +31,32 @@ const HeaderNav = ({
     setIsHeartClicked(!isHeartClicked)
   }
 
+  useEffect(() => {
+    if (arrayOfObjectCart.length > 0) {
+      const totalCartNumbers = arrayOfObjectCart
+        .map(({ qty }) => qty)
+        .reduce((a, b) => a + b)
+      const subtotal = arrayOfObjectCart
+        .map(({ qty, price }) => qty * price)
+        .reduce((a, b) => a + b)
+      const taxTotal = parseInt((subtotal * 0.13).toFixed(2))
+      const finalTotal = taxTotal + subtotal
+      setValue({
+        totalCartNumbers: totalCartNumbers,
+        subtotal: subtotal,
+        taxTotal: taxTotal,
+        finalTotal: finalTotal,
+      })
+    } else {
+      setValue({
+        totalCartNumbers: 0,
+        subtotal: 0,
+        taxTotal: 0,
+        finalTotal: 0,
+      })
+    }
+  }, [arrayOfObjectCart])
+
   return (
     <>
       {isCartClicked ? (
@@ -34,6 +64,7 @@ const HeaderNav = ({
           showCart={showCart}
           arrayOfObjectCart={arrayOfObjectCart}
           setArrayOfObjectCart={setArrayOfObjectCart}
+          value={value}
         />
       ) : (
         "Cart is not clicked"
@@ -65,7 +96,12 @@ const HeaderNav = ({
               />
             </Link>
             <Link to='/'>
-              <FontAwesomeIcon icon={faCartShopping} onClick={showCart} />
+              <div className="cart-icon-container">
+                <FontAwesomeIcon icon={faCartShopping} onClick={showCart} className="cart-icon"/>
+                {value.totalCartNumbers?
+                <span className='cartQty'>{value.totalCartNumbers}</span>
+                : null}
+              </div>
             </Link>
           </li>
         </ul>

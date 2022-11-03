@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useState } from "react"
 
 const Cart = ({
   showCart,
   arrayOfObjectCart,
   setArrayOfObjectCart,
+  value,
 }) => {
-  const [value, setValue] = useState({})
+  
   const removeItem = (product) => {
     const findSelectedProduct = arrayOfObjectCart.filter(
       (item) => item.id !== product.id
@@ -36,32 +36,7 @@ const Cart = ({
     setArrayOfObjectCart(newCartItems)
   }
 
-  useEffect(() => {
-    if(arrayOfObjectCart.length >0){
-      const totalCartNumbers = arrayOfObjectCart
-        .map(({ qty }) => qty)
-        .reduce((a, b) => a + b)
-      const subtotal = arrayOfObjectCart
-        .map(({ qty, price }) => qty * price)
-        .reduce((a, b) => a + b)
-      const taxTotal = parseInt((subtotal * 0.13).toFixed(2))
-      const finalTotal = taxTotal + subtotal  
-      setValue({
-        totalCartNumbers: totalCartNumbers,
-        subtotal: subtotal,
-        taxTotal: taxTotal,
-        finalTotal: finalTotal
-      })
-    }else{
-      setValue({
-        totalCartNumbers: 0,
-        subtotal: 0,
-        taxTotal: 0,
-        finalTotal: 0,
-      })
 
-    }
-  }, [arrayOfObjectCart])
 
   return (
     <div className='dark-background'>

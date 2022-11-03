@@ -16,7 +16,6 @@ const Header = ({ scollToRef }) => {
             consectetur adipisicing elit. Asperiores, nisi! Lorem ipsum dolor.
           </p>
           <button onClick={() => scollToRef.current.scrollIntoView()}>Shop Now</button>
-          {/* <Link to='#productLists'>Shop Now</Link> */}
         </div>
       </div>
     </header>

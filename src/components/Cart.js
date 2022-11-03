@@ -8,6 +8,7 @@ const Cart = ({
   value,
 }) => {
   
+  // remove selected object when user clicks remove button from cart
   const removeItem = (product) => {
     const findSelectedProduct = arrayOfObjectCart.filter(
       (item) => item.id !== product.id
@@ -15,6 +16,7 @@ const Cart = ({
     setArrayOfObjectCart(findSelectedProduct)
   }
 
+  // When user clicks + button, increase the quantity to +1
   const increaseQty = (product) => {
     const exist = arrayOfObjectCart.find((x) => x.id === product.id)
     const newCartItems = arrayOfObjectCart.map((x) =>
@@ -22,6 +24,8 @@ const Cart = ({
     )
     setArrayOfObjectCart(newCartItems)
   }
+
+  // When user clicks - button, if the quantity is 1, leave it, if it is higher than 1, decrease -1
   const decreaseQty = (product) => {
     const exist = arrayOfObjectCart.find((x) => x.id === product.id)
     const newCartItems = arrayOfObjectCart.map((x) =>

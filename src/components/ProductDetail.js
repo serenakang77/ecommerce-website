@@ -5,12 +5,14 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 const ProductDetails = ({getIdObject}) => {
+  // get specific id object when user clicks the product detail 
   const [singleItem, setSingleItem] = useState([])
   const { id } = useParams()
   useEffect(() => {
     axios
       .get("https://makeup-api.herokuapp.com/api/v1/products.json", {})
       .then(function (res) {
+        // filter the data with specific object, and change the useState value
         const filteredProduct1 = res.data.filter(
           (individual) => {
             return individual.id === +id}

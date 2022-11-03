@@ -18,21 +18,26 @@ const HeaderNav = ({
   getIdObject,
   removeFromWish,
 }) => {
-  // change the value to be object so that it includes properties like total Cart numbers, subtotal, taxTotal, finalTotal 
+  // change the value to be object so that it includes properties like total Cart numbers, subtotal, taxTotal, finalTotal
   const [value, setValue] = useState({})
 
+  // Function to check if user clicks the cart on the header-nav
   const showCart = (e) => {
     e.preventDefault()
     setIsCartClicked(!isCartClicked)
   }
 
+  // Function to check if user clicks the hearts on the header-nav
   const showWishList = (e) => {
     e.preventDefault()
     setIsHeartClicked(!isHeartClicked)
   }
 
+  // use useEffect whenever arrayOfObjectCart value changes
   useEffect(() => {
+    // if cart has some lists, do below
     if (arrayOfObjectCart.length > 0) {
+      // Made all variables to save it into useState for cart total qty, price
       const totalCartNumbers = arrayOfObjectCart
         .map(({ qty }) => qty)
         .reduce((a, b) => a + b)
@@ -48,6 +53,7 @@ const HeaderNav = ({
         finalTotal: finalTotal,
       })
     } else {
+      // if the Cart is empty, set it to below value
       setValue({
         totalCartNumbers: 0,
         subtotal: 0,
@@ -96,11 +102,15 @@ const HeaderNav = ({
               />
             </Link>
             <Link to='/'>
-              <div className="cart-icon-container">
-                <FontAwesomeIcon icon={faCartShopping} onClick={showCart} className="cart-icon"/>
-                {value.totalCartNumbers?
-                <span className='cartQty'>{value.totalCartNumbers}</span>
-                : null}
+              <div className='cart-icon-container'>
+                <FontAwesomeIcon
+                  icon={faCartShopping}
+                  onClick={showCart}
+                  className='cart-icon'
+                />
+                {value.totalCartNumbers ? (
+                  <span className='cartQty'>{value.totalCartNumbers}</span>
+                ) : null}
               </div>
             </Link>
           </li>

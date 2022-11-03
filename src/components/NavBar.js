@@ -1,6 +1,7 @@
 
 const NavBar = ({setProduct}) => {
 
+  // Whenever user clicks the product type, change that type to be selected value
   const handleChangeType = (event) => {
     return setProduct(event.target.value)
   }

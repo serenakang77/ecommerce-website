@@ -24,9 +24,11 @@ function App() {
   // Array of Object that is inside of WishList
   const [arrayOfObjectWish, setArrayOfObjectWish] = useState([])
 
+  
   const scollToRef = useRef()
-
+  
   useEffect(() => {
+    const removeIds = [1005, 1004, 1003, 1002, 1001, 1000, 999]
     // if product State is placeholder which is default value of All product, do not set any params, else set product_type to be selected value
     const myparams =
       product === "placeholder"
@@ -44,16 +46,10 @@ function App() {
             (individual) =>
               individual.currency === "USD" &&
               individual.price !== "0.0" &&
-              individual.id !== 1005 &&
-              individual.id !== 1004 &&
-              individual.id !== 1003 &&
-              individual.id !== 1002 &&
-              individual.id !== 1001 &&
-              individual.id !== 1000 &&
-              individual.id !== 999
+              !removeIds.includes(individual.id)
           )
           .slice(0, 200)
-        filteredProduct1.map((item) => {
+          filteredProduct1.map((item) => {
           // add the property inWishList default value as false for all objects
           item.inWishList = false
           arrayOfObjectWish.filter((x) => {

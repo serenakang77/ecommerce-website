@@ -6,82 +6,38 @@ const NavBar = ({setProduct}) => {
     return setProduct(event.target.value)
   }
 
+  const formArray = [
+    { id: 'allProduct', value: 'placeholder', label: 'View All' },
+    { id: 'blush', value: 'blush', label: 'Blush' },
+    { id: 'bronzer', value: 'bronzer', label: 'Bronzer' },
+    { id: 'eyebrow', value: 'eyebrow', label: 'Eyebrow' },
+    { id: 'eyeliner', value: 'eyeliner', label: 'Eyeliner' },
+    { id: 'eyeshadow', value: 'eyeshadow', label: 'Eyeshadow' },
+    { id: 'foundation', value: 'foundation', label: 'Foundation' },
+    { id: 'lipstick', value: 'lipstick', label: 'Lipstick' },
+    { id: 'mascara', value: 'mascara', label: 'Mascara' },
+  ]
+
   return (
     <nav>
       <form action='' autoComplete="on">
         <fieldset>
-          <input
-            type='radio'
-            id='allProduct'
-            name='type'
-            value='placeholder'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='allProduct'>View All</label>
-          <input
-            type='radio'
-            id='blush'
-            name='type'
-            value='blush'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='blush'>Blush</label>
-          <input
-            type='radio'
-            id='bronzer'
-            name='type'
-            value='bronzer'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='bronzer'>Bronzer</label>
-          <input
-            type='radio'
-            id='eyebrow'
-            name='type'
-            value='eyebrow'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='eyebrow'>Eyebrow</label>
-          <input
-            type='radio'
-            id='eyeliner'
-            name='type'
-            value='eyeliner'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='eyeliner'>Eyeliner</label>
-          <input
-            type='radio'
-            id='Eyeshadow'
-            name='type'
-            value='eyeshadow'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='Eyeshadow'>Eyeshadow</label>
-          <input
-            type='radio'
-            id='foundation'
-            name='type'
-            value='foundation'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='foundation'>Foundation</label>
-          <input
-            type='radio'
-            id='lipstick'
-            name='type'
-            value='lipstick'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='lipstick'>Lipstick</label>
-          <input
-            type='radio'
-            id='Mascara'
-            name='type'
-            value='mascara'
-            onClick={handleChangeType}
-          />
-          <label htmlFor='Mascara'>Mascara</label>
+          {
+            formArray.map(individual => {
+              return (
+                <>
+                  <input
+                    type='radio'
+                    id={individual.id}
+                    name='type'
+                    value={individual.value}
+                    onClick={handleChangeType}
+                  />
+                  <label htmlFor={individual.id}>{individual.label}</label>
+                </>
+              )
+            })
+          }
         </fieldset>
       </form>
     </nav>

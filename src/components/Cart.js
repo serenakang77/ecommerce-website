@@ -52,74 +52,74 @@ const Cart = ({
         </div>
         <div className='cart-item-list'>
           <ul>
-            {arrayOfObjectCart
-              ? arrayOfObjectCart.map((individual) => {
-                  return (
-                    <li key={individual.id}>
-                      <div className='cart-product-img'>
-                        <img src={individual.api_featured_image} alt='' />
-                      </div>
-                      <div className='cart-product-content'>
-                        <h3>{individual.name}</h3>
-                        <p>
-                          {individual.description.length > 110
-                            ? individual.description.substring(0, 110) + "..."
-                            : individual.description}
-                        </p>
-                        <div className="numbers-quantity-container">
-                          <button
-                            onClick={() => {
-                              decreaseQty(individual)
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faMinus} />
-                          </button>
-                          <span>{individual.qty}</span>
-                          <button
-                            onClick={() => {
-                              increaseQty(individual)
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faPlus} />
-                          </button>
-                        </div>
-                        <p>${individual.price * individual.qty} USD</p>
+            {arrayOfObjectCart ? (
+              arrayOfObjectCart.map((individual) => {
+                return (
+                  <li key={individual.id}>
+                    <div className='cart-product-img'>
+                      <img src={individual.api_featured_image} alt='' />
+                    </div>
+                    <div className='cart-product-content'>
+                      <h3>{individual.name}</h3>
+                      <p>
+                        {individual.description.length > 110
+                          ? individual.description.substring(0, 110) + "..."
+                          : individual.description}
+                      </p>
+                      <div className='numbers-quantity-container'>
                         <button
-                          className="remove-from-cart"
                           onClick={() => {
-                            removeItem(individual)
+                            decreaseQty(individual)
                           }}
                         >
-                          Remove Item
+                          <FontAwesomeIcon icon={faMinus} />
+                        </button>
+                        <span>{individual.qty}</span>
+                        <button
+                          onClick={() => {
+                            increaseQty(individual)
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faPlus} />
                         </button>
                       </div>
-                    </li>
-                  )
-                })
-              : "null"}
+                      <p>${individual.price * individual.qty} USD</p>
+                      <button
+                        className='remove-from-cart'
+                        onClick={() => {
+                          removeItem(individual)
+                        }}
+                      >
+                        Remove Item
+                      </button>
+                    </div>
+                  </li>
+                )
+              })
+            ) : (
+              "Add some items to your cart!"
+            )}
           </ul>
         </div>
-          {arrayOfObjectCart ? (
-            <div className="cover">
-              <div className='totalMoney'>
-                <p>
-                  Merchandise Subtotal <strong>${value.subtotal}</strong>
-                </p>
-                <p>
-                  Shipping & Handling <strong>free</strong>
-                </p>
-                <p>
-                  GST/HST Subtital <strong>${value.taxTotal}</strong>
-                </p>
-                <h4>
-                  TOTAL ${value.finalTotal} USD
-                </h4>
+        {arrayOfObjectCart ? (
+          <div className='cover'>
+            <div className='totalMoney'>
+              <p>
+                Merchandise Subtotal <strong>${value.subtotal}</strong>
+              </p>
+              <p>
+                Shipping & Handling <strong>free</strong>
+              </p>
+              <p>
+                GST/HST Subtital <strong>${value.taxTotal}</strong>
+              </p>
+              <h4>TOTAL ${value.finalTotal} USD</h4>
               <button>Check Out</button>
-              </div>
             </div>
-          ) : (
-            "Item is not added"
-          )}
+          </div>
+        ) : (
+          "Item is not added"
+        )}
       </div>
     </div>
   )
